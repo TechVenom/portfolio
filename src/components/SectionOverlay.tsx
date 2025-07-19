@@ -10,8 +10,9 @@ interface SectionOverlayProps {
 }
 
 // Generate a unique z-index for each overlay based on section name
+// Start at z-index 100 to ensure overlays are above footer (z-10)
 const getZIndex = (sectionName: string): number => {
-  const baseZIndex = 50;
+  const baseZIndex = 100;
   const sectionOrder = ['about', 'overview', 'timeline', 'services', 'projects', 'testimonials', 'contact'];
   const index = sectionOrder.indexOf(sectionName);
   return baseZIndex + (index >= 0 ? index : 0);

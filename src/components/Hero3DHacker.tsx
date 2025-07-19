@@ -242,6 +242,28 @@ const Hero3DHacker: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* Footer - stays in background */}
+        <footer className="absolute bottom-0 left-0 right-0 z-10 bg-black/30 backdrop-blur-sm border-t border-green-400/20 py-4">
+          <div className="container mx-auto px-8 lg:px-16">
+            <div className="flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+              <div className="flex items-center space-x-3 mb-2 md:mb-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
+                  <span className="text-black font-bold font-mono">H</span>
+                </div>
+                <span className="text-lg font-bold text-green-400 font-mono">Hezron Paipai</span>
+              </div>
+
+              <div className="text-sm text-gray-400 font-mono">
+                <span>© 2025 Hezron Paipai</span>
+                <span className="mx-2 text-green-400">•</span>
+                <span>Ethical Hacker & AI Developer</span>
+                <span className="mx-2 text-green-400">•</span>
+                <span>Built with React & TypeScript</span>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </section>
   );
