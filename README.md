@@ -198,7 +198,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 **Hezron Paipai**
 - GitHub: [@TechVenom](https://github.com/TechVenom)
 - LinkedIn: [Hezron Paipai](https://linkedin.com/in/hezron-paipai)
-- Email: hezronpaipai@gmail.com
+- Email: gptboy47@gmail.com
 
 ---
 
