@@ -1,8 +1,6 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Canvas } from '@react-three/fiber';
-import { PerspectiveCamera } from '@react-three/drei';
 import {
   Github,
   ExternalLink,
@@ -14,7 +12,6 @@ import {
   Star,
   GitFork
 } from 'lucide-react';
-import ProjectShowcase3D from './3D/ProjectCard3D';
 
 const Projects: React.FC = () => {
   const [ref, inView] = useInView({

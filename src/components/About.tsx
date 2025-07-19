@@ -1,8 +1,6 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Canvas } from '@react-three/fiber';
-import { PerspectiveCamera } from '@react-three/drei';
 import {
   Brain,
   Shield,
@@ -13,7 +11,6 @@ import {
   Globe,
   Zap
 } from 'lucide-react';
-import SkillVisualization from './3D/SkillSphere';
 
 const About: React.FC = () => {
   const [ref, inView] = useInView({

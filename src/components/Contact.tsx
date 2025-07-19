@@ -1,8 +1,6 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Canvas } from '@react-three/fiber';
-import { PerspectiveCamera } from '@react-three/drei';
 import {
   Mail,
   Phone,
@@ -14,7 +12,6 @@ import {
   Clock,
   CheckCircle
 } from 'lucide-react';
-import ContactElements3D from './3D/ContactElements3D';
 
 const Contact: React.FC = () => {
   const [ref, inView] = useInView({
