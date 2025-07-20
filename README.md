@@ -1,4 +1,4 @@
-# 🚀 Hezron Paipai - Interactive Portfolio
+# 🚀 VENOMX - Interactive Portfolio
 
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue.svg)](https://www.typescriptlang.org/)
@@ -195,13 +195,13 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 📞 Contact
 
-**Hezron Paipai**
+**VENOMX**
 - GitHub: [@TechVenom](https://github.com/TechVenom)
-- LinkedIn: [Hezron Paipai](https://linkedin.com/in/hezron-paipai)
-- Email: gptboy47@gmail.com
+- LinkedIn: [VENOMX](https://linkedin.com/in/hezron-paipai)
+- Email: Techvenom606@proton.me
 
 ---
 
 ⭐ **Star this repository if you found it helpful!**
 
-*Built with ❤️ by Hezron Paipai - Ethical Hacker & AI Developer*
+*Built with ❤️ by VENOMX - Ethical Hacker & AI Developer*
