@@ -1,11 +1,16 @@
 {
-  "short_name": "venomx Portfolio",
-  "name": "venomx - Ethical Hacker & AI Developer",
+  "short_name": "venomx",
+  "name": "venomx",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     },
     {
       "src": "logo192.png",
