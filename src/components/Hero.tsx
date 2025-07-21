@@ -107,9 +107,7 @@ const Hero: React.FC = () => {
             >
               <p className="text-primary-400 text-lg font-medium">👋 Hey there! I'm</p>
               <h1 className="text-5xl lg:text-7xl font-bold">
-                <span className="glow-text">Hezron</span>
-                <br />
-                <span className="text-white">Paipai</span>
+                <span className="glow-text">venomx</span>
               </h1>
             </motion.div>
 

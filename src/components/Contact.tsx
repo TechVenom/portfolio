@@ -58,8 +58,8 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'gptboy47@gmail.com',
-      href: 'mailto:gptboy47@gmail.com',
+      value: 'venomx0@protonmail.com',
+      href: 'mailto:venomx0@protonmail.com',
       color: 'from-blue-500 to-cyan-500'
     },
     {
@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
     {
       icon: Github,
       label: 'GitHub',
-      href: 'https://github.com/TechVenom',
+      href: 'https://github.com/venomx',
       color: 'hover:text-gray-400'
     },
     {

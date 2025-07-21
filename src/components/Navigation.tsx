@@ -24,8 +24,8 @@ const Navigation: React.FC = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/TechVenom', label: 'GitHub' },
-    { icon: Mail, href: 'mailto:gptboy47@gmail.com', label: 'Email' },
+    { icon: Github, href: 'https://github.com/venomx', label: 'GitHub' },
+    { icon: Mail, href: 'mailto:venomx0@protonmail.com', label: 'Email' },
     { icon: Linkedin, href: '#', label: 'LinkedIn' },
     { icon: Twitter, href: '#', label: 'Twitter' },
   ];
@@ -59,9 +59,9 @@ const Navigation: React.FC = () => {
               className="flex items-center space-x-2"
             >
               <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">H</span>
+                <span className="text-white font-bold text-lg">V</span>
               </div>
-              <span className="text-xl font-bold glow-text">Hezron Paipai</span>
+              <span className="text-xl font-bold glow-text">venomx</span>
             </motion.div>
 
             {/* Desktop Navigation */}

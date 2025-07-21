@@ -118,9 +118,7 @@ const Hero3DHacker: React.FC = () => {
                   <span className="text-cyan-400">$</span> whoami
                 </p>
                 <h1 className="text-6xl lg:text-8xl font-bold font-mono leading-tight">
-                  <span className="text-green-400 glow-text">Hezron</span>
-                  <br />
-                  <span className="text-white">Paipai</span>
+                  <span className="text-green-400 glow-text">venomx</span>
                 </h1>
               </motion.div>
 
@@ -173,7 +171,7 @@ const Hero3DHacker: React.FC = () => {
               transition={{ delay: 0.8 }}
               className="bg-black/50 border border-green-400/30 rounded-lg p-4 font-mono text-sm backdrop-blur-sm"
             >
-              <div className="text-green-400 mb-2">$ cat /proc/hezron/stats</div>
+              <div className="text-green-400 mb-2">$ cat /proc/venomx/stats</div>
               <div className="space-y-1 text-gray-300">
                 <div><span className="text-cyan-400">projects:</span> 3+</div>
                 <div><span className="text-cyan-400">technologies:</span> 5+</div>
@@ -249,13 +247,13 @@ const Hero3DHacker: React.FC = () => {
             <div className="flex flex-col md:flex-row items-center justify-between text-center md:text-left">
               <div className="flex items-center space-x-3 mb-2 md:mb-0">
                 <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
-                  <span className="text-black font-bold font-mono">H</span>
+                  <span className="text-black font-bold font-mono">V</span>
                 </div>
-                <span className="text-lg font-bold text-green-400 font-mono">Hezron Paipai</span>
+                <span className="text-lg font-bold text-green-400 font-mono">venomx</span>
               </div>
 
               <div className="text-sm text-gray-400 font-mono">
-                <span>© 2025 Hezron Paipai</span>
+                <span>© 2025 venomx</span>
                 <span className="mx-2 text-green-400">•</span>
                 <span>Ethical Hacker & AI Developer</span>
                 <span className="mx-2 text-green-400">•</span>

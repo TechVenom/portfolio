@@ -21,7 +21,7 @@ const InteractiveTerminal: React.FC = () => {
     {
       id: 0,
       type: 'output',
-      content: '🚀 Welcome to Hezron Paipai\'s Dynamic Portfolio Terminal v3.0.0',
+      content: '🚀 Welcome to venomx\'s Dynamic Portfolio Terminal v3.0.0',
       timestamp: new Date().toLocaleTimeString()
     },
     {
@@ -130,7 +130,7 @@ const InteractiveTerminal: React.FC = () => {
       description: 'Display user information',
       action: () => {
         const info = [
-          'User: Hezron Paipai',
+          'User: venomx',
           'Role: Computer System Engineer & AI Developer',
           'Location: Kenya',
           'Specialization: Cybersecurity, AI Development, Full Stack',
@@ -227,12 +227,12 @@ const InteractiveTerminal: React.FC = () => {
       description: 'List available sections',
       action: () => {
         const sections = [
-          'drwxr-xr-x  2 hezron hezron 4096 Jan 19 2025 about/',
-          'drwxr-xr-x  2 hezron hezron 4096 Jan 19 2025 projects/',
-          'drwxr-xr-x  2 hezron hezron 4096 Jan 19 2025 services/',
-          'drwxr-xr-x  2 hezron hezron 4096 Jan 19 2025 timeline/',
-          'drwxr-xr-x  2 hezron hezron 4096 Jan 19 2025 contact/',
-          '-rw-r--r--  1 hezron hezron 2048 Jan 19 2025 resume.pdf'
+          'drwxr-xr-x  2 venomx venomx 4096 Jan 19 2025 about/',
+          'drwxr-xr-x  2 venomx venomx 4096 Jan 19 2025 projects/',
+          'drwxr-xr-x  2 venomx venomx 4096 Jan 19 2025 services/',
+          'drwxr-xr-x  2 venomx venomx 4096 Jan 19 2025 timeline/',
+          'drwxr-xr-x  2 venomx venomx 4096 Jan 19 2025 contact/',
+          '-rw-r--r--  1 venomx venomx 2048 Jan 19 2025 resume.pdf'
         ];
         
         sections.forEach((line, index) => {
@@ -256,7 +256,7 @@ const InteractiveTerminal: React.FC = () => {
       name: 'pwd',
       description: 'Print working directory',
       action: () => {
-        addLine('output', '/home/hezron/portfolio');
+        addLine('output', '/home/venomx/portfolio');
       }
     },
     
@@ -283,7 +283,7 @@ const InteractiveTerminal: React.FC = () => {
       action: () => {
         addLine('output', 'Opening GitHub profile...');
         setTimeout(() => {
-          window.open('https://github.com/hezronpaipai', '_blank');
+          window.open('https://github.com/venomx', '_blank');
           addLine('output', '✓ GitHub profile opened in new tab');
         }, 1000);
       }
@@ -415,7 +415,7 @@ const InteractiveTerminal: React.FC = () => {
       name: 'email',
       description: 'Show contact email',
       action: () => {
-        addLine('output', 'Email: hezron.paipai@example.com');
+        addLine('output', 'Email: venomx0@protonmail.com');
         addLine('output', 'Feel free to reach out for collaborations!');
       }
     },
@@ -426,7 +426,7 @@ const InteractiveTerminal: React.FC = () => {
       action: () => {
         addLine('output', 'Opening LinkedIn profile...');
         setTimeout(() => {
-          window.open('https://linkedin.com/in/hezronpaipai', '_blank');
+          window.open('https://linkedin.com/in/venomx', '_blank');
           addLine('output', '✓ LinkedIn profile opened in new tab');
         }, 1000);
       }
@@ -513,7 +513,7 @@ const InteractiveTerminal: React.FC = () => {
     }
     
     // Add command line to terminal
-    addLine('command', `hezron@portfolio:~$ ${trimmedInput}`);
+    addLine('command', `venomx@portfolio:~$ ${trimmedInput}`);
     
     if (!trimmedInput) return;
     
@@ -576,7 +576,7 @@ const InteractiveTerminal: React.FC = () => {
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div className="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
-        <div className="text-green-400 text-xs">hezron@portfolio:~</div>
+        <div className="text-green-400 text-xs">venomx@portfolio:~</div>
         <div className="text-green-400 text-xs">
           {new Date().toLocaleTimeString()}
         </div>
@@ -616,7 +616,7 @@ const InteractiveTerminal: React.FC = () => {
           }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <span className="mr-3 text-cyan-400 font-mono">hezron@portfolio:~$</span>
+          <span className="mr-3 text-cyan-400 font-mono">venomx@portfolio:~$</span>
           <input
             ref={inputRef}
             type="text"

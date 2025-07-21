@@ -1,4 +1,4 @@
-# 🚀 VENOMX - Interactive Portfolio
+# 🚀 Hezron Paipai - Interactive Portfolio
 
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue.svg)](https://www.typescriptlang.org/)
@@ -98,7 +98,7 @@ quote        # Display random quote
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/TechVenom/portfolio.git
+   git clone https://github.com/venomx/portfolio.git
    cd portfolio
    ```
 
@@ -191,17 +191,17 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/TechVenom/portfolio/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/venomx/portfolio/issues).
 
 ## 📞 Contact
 
-**VENOMX**
+**Hezron Paipai**
 - GitHub: [@TechVenom](https://github.com/TechVenom)
-- LinkedIn: [VENOMX](https://linkedin.com/in/hezron-paipai)
-- Email: Techvenom606@proton.me
+- LinkedIn: [Hezron Paipai](https://linkedin.com/in/hezron-paipai)
+- Email: gptboy47@gmail.com
 
 ---
 
 ⭐ **Star this repository if you found it helpful!**
 
-*Built with ❤️ by VENOMX - Ethical Hacker & AI Developer*
+*Built with ❤️ by Hezron Paipai - Ethical Hacker & AI Developer*

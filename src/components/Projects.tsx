@@ -30,7 +30,7 @@ const Projects: React.FC = () => {
       category: 'Cybersecurity',
       icon: Shield,
       color: 'from-red-500 to-orange-500',
-      github: 'https://github.com/TechVenom/ShadowCloak',
+      github: 'https://github.com/venomx/ShadowCloak',
       demo: '#',
       features: [
         'Modular Architecture',
@@ -55,7 +55,7 @@ const Projects: React.FC = () => {
       category: 'AI Security',
       icon: Eye,
       color: 'from-purple-500 to-pink-500',
-      github: 'https://github.com/TechVenom/ShadowVeil',
+      github: 'https://github.com/venomx/ShadowVeil',
       demo: '#',
       features: [
         'Real-time Monitoring',
