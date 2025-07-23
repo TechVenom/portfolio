@@ -27,7 +27,7 @@ const InteractiveTerminal: React.FC = () => {
     {
       id: 1,
       type: 'output',
-      content: '─'.repeat(65),
+      content: '─'.repeat(40),
     },
     {
       id: 2,
@@ -51,6 +51,11 @@ const InteractiveTerminal: React.FC = () => {
     },
     {
       id: 6,
+      type: 'output',
+      content: '🔄 Toggle "Scroll Mode" button to switch to traditional navigation',
+    },
+    {
+      id: 7,
       type: 'output',
       content: '',
     }
@@ -568,73 +573,97 @@ const InteractiveTerminal: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full h-full bg-black border border-green-400/30 rounded-lg overflow-hidden font-mono text-sm">
+    <div className="w-full h-full bg-black border border-green-400/30 rounded-lg overflow-hidden font-mono text-xs">
       {/* Terminal Header */}
-      <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-green-400/30">
+      <div className="bg-gray-800 px-3 py-2 flex items-center justify-between border-b border-green-400/30 flex-shrink-0">
         <div className="flex items-center space-x-2">
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div className="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
-        <div className="text-green-400 text-xs">venomx@portfolio:~</div>
-        <div className="text-green-400 text-xs">
+        <div className="text-green-400 text-xs truncate">venomx@portfolio:~</div>
+        <div className="text-green-400 text-xs hidden sm:block">
           {new Date().toLocaleTimeString()}
         </div>
       </div>
 
       {/* Terminal Content */}
-      <div
-        ref={terminalRef}
-        className="h-[400px] overflow-y-auto p-6 space-y-2"
-        onClick={() => inputRef.current?.focus()}
-      >
-        <AnimatePresence>
-          {lines.map((line) => (
-            <motion.div
-              key={line.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className={`${
-                line.type === 'command' 
-                  ? 'text-green-400' 
-                  : line.type === 'error' 
-                  ? 'text-red-400' 
-                  : 'text-gray-300'
-              }`}
-            >
-              {line.content}
-            </motion.div>
-          ))}
-        </AnimatePresence>
-
-        {/* Current Input Line */}
-        <motion.div
-          className="flex items-center text-green-400 bg-black/30 p-3 rounded border border-green-400/30 text-lg"
-          animate={{
-            borderColor: ['rgba(34, 197, 94, 0.3)', 'rgba(34, 197, 94, 0.6)', 'rgba(34, 197, 94, 0.3)']
+      <div className="flex flex-col h-full">
+        <div
+          ref={terminalRef}
+          className="flex-1 overflow-y-auto overflow-x-hidden p-2 sm:p-3 space-y-0.5 scrollbar-hide min-h-0"
+          style={{
+            scrollbarWidth: 'none', /* Firefox */
+            msOverflowStyle: 'none', /* Internet Explorer 10+ */
+            maxHeight: 'calc(100% - 140px)' // Reserve space for input area
           }}
-          transition={{ duration: 2, repeat: Infinity }}
+          onClick={() => inputRef.current?.focus()}
         >
-          <span className="mr-3 text-cyan-400 font-mono">venomx@portfolio:~$</span>
-          <input
-            ref={inputRef}
-            type="text"
-            value={currentInput}
-            onChange={(e) => setCurrentInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent outline-none text-green-400 caret-green-400 placeholder-gray-500 font-mono text-lg"
-            placeholder={isTyping ? "Processing..." : "Type a command and press Enter..."}
-            disabled={isTyping}
-          />
-          <motion.span
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-            className="text-green-400 font-bold text-lg"
+          <AnimatePresence>
+            {lines.map((line) => (
+              <motion.div
+                key={line.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className={`break-words overflow-wrap-anywhere leading-tight text-[10px] sm:text-xs ${
+                  line.type === 'command'
+                    ? 'text-green-400'
+                    : line.type === 'error'
+                    ? 'text-red-400'
+                    : 'text-gray-300'
+                }`}
+                style={{ wordBreak: 'break-all', overflowWrap: 'anywhere' }}
+              >
+                {line.content}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Current Input Line - Fixed at bottom */}
+        <div className="flex-shrink-0 p-3 sm:p-4 border-t border-green-400/30 bg-black/20">
+          <motion.div
+            className="flex items-center text-green-400 bg-black/50 p-2 rounded-lg border-2 border-green-400/50 text-xs shadow-lg shadow-green-400/20"
+            animate={{
+              borderColor: ['rgba(34, 197, 94, 0.5)', 'rgba(34, 197, 94, 0.8)', 'rgba(34, 197, 94, 0.5)'],
+              boxShadow: [
+                '0 4px 20px rgba(34, 197, 94, 0.2)',
+                '0 4px 25px rgba(34, 197, 94, 0.4)',
+                '0 4px 20px rgba(34, 197, 94, 0.2)'
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
           >
-            █
-          </motion.span>
-        </motion.div>
+            <span className="mr-2 text-cyan-400 font-mono flex-shrink-0 text-xs font-bold">venomx@portfolio:~$</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={currentInput}
+              onChange={(e) => setCurrentInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="flex-1 bg-transparent outline-none text-green-400 caret-green-400 placeholder-gray-400 font-mono text-xs min-w-0 font-medium"
+              placeholder={isTyping ? "Processing..." : "Type a command and press Enter..."}
+              disabled={isTyping}
+              style={{
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+            />
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="text-green-400 font-bold text-xs flex-shrink-0 ml-1"
+            >
+              █
+            </motion.span>
+          </motion.div>
+
+          {/* Input Helper Text */}
+          <div className="mt-1 text-[10px] text-gray-500 text-center">
+            Press <span className="text-green-400 font-mono">Enter</span> to execute • <span className="text-green-400 font-mono">↑↓</span> for history
+          </div>
+        </div>
       </div>
     </div>
   );

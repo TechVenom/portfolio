@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSectionContext } from '../context/SectionContext';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { navigationMode } = useSectionContext();
+
+  // Apply scroll mode class to html element when navigation mode changes
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    if (navigationMode === 'scroll') {
+      htmlElement.classList.add('scroll-mode');
+    } else {
+      htmlElement.classList.remove('scroll-mode');
+    }
+
+    // Cleanup on unmount
+    return () => {
+      htmlElement.classList.remove('scroll-mode');
+    };
+  }, [navigationMode]);
+
   return (
-    <div className="h-screen bg-dark-900 relative overflow-hidden">
+    <div className="bg-dark-900 relative h-full">
       {/* Background Effects */}
       <div className="fixed inset-0 z-0">
         {/* Animated Grid Background */}
@@ -29,7 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
 
       {/* Main Content */}
-      <main className="relative z-10 h-screen">
+      <main className="relative z-10 h-full">
         {children}
       </main>
     </div>

@@ -7,6 +7,9 @@ interface SectionContextType {
   isSectionVisible: (sectionName: string) => boolean;
   showAllSections: () => void;
   hideAllSections: () => void;
+  isTerminalVisible: boolean;
+  setTerminalVisible: (visible: boolean) => void;
+  navigationMode: 'terminal' | 'scroll';
 }
 
 const SectionContext = createContext<SectionContextType | undefined>(undefined);
@@ -31,12 +34,29 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({ children }) =>
     return initialSet;
   });
 
+  // Terminal visibility state - check localStorage first, default to true (terminal mode)
+  const [isTerminalVisible, setIsTerminalVisible] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('portfolio-terminal-mode');
+      return saved !== null ? JSON.parse(saved) : true;
+    } catch {
+      return true; // Default to terminal mode if localStorage fails
+    }
+  });
+
+  // Navigation mode depends on terminal visibility
+  const navigationMode: 'terminal' | 'scroll' = isTerminalVisible ? 'terminal' : 'scroll';
+
   const showSection = (sectionName: string) => {
-    setVisibleSections(prev => {
-      const newSet = new Set(prev);
-      newSet.add(sectionName);
-      return newSet;
-    });
+    // In terminal mode, show as overlay
+    // In scroll mode, this function is not used as all sections are always visible
+    if (navigationMode === 'terminal') {
+      setVisibleSections(prev => {
+        const newSet = new Set(prev);
+        newSet.add(sectionName);
+        return newSet;
+      });
+    }
   };
 
   const hideSection = (sectionName: string) => {
@@ -70,6 +90,20 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({ children }) =>
     setVisibleSections(homeOnly); // Always keep home visible
   };
 
+  const setTerminalVisible = (visible: boolean) => {
+    setIsTerminalVisible(visible);
+    // Save preference to localStorage
+    try {
+      localStorage.setItem('portfolio-terminal-mode', JSON.stringify(visible));
+    } catch {
+      // Ignore localStorage errors
+    }
+    // When switching to scroll mode, hide all overlays
+    if (!visible) {
+      hideAllSections();
+    }
+  };
+
   const value: SectionContextType = {
     visibleSections,
     showSection,
@@ -77,6 +111,9 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({ children }) =>
     isSectionVisible,
     showAllSections,
     hideAllSections,
+    isTerminalVisible,
+    setTerminalVisible,
+    navigationMode,
   };
 
   return (

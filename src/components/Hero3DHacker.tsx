@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Download, ExternalLink, Terminal } from 'lucide-react';
 import InteractiveTerminal from './InteractiveTerminal';
+import ScrollableLayout from './ScrollableLayout';
+import { useSectionContext } from '../context/SectionContext';
 
 const Hero3DHacker: React.FC = () => {
+  const { isTerminalVisible, setTerminalVisible, navigationMode } = useSectionContext();
   const [currentRole, setCurrentRole] = useState(0);
-  const [showTerminal, setShowTerminal] = useState(true);
+
+  // Debug logging
+  console.log('Hero3DHacker render - isTerminalVisible:', isTerminalVisible, 'navigationMode:', navigationMode);
   
   const roles = [
     'Ethical Hacker',
@@ -25,8 +30,16 @@ const Hero3DHacker: React.FC = () => {
 
 
 
+  // If in scroll mode, render the ScrollableLayout instead
+  if (navigationMode === 'scroll') {
+    return <ScrollableLayout />;
+  }
+
+  // Terminal mode - render the hero section with terminal
   return (
-    <section id="home" className="h-screen relative overflow-hidden">
+    <div className="w-full overflow-x-hidden">
+      {/* Hero Section */}
+      <section id="home" className={`${isTerminalVisible ? 'h-screen' : 'min-h-screen'} relative overflow-hidden w-full`}>
       {/* Dark Cyber Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900">
         {/* Matrix-style background pattern */}
@@ -85,27 +98,41 @@ const Hero3DHacker: React.FC = () => {
         ))}
       </div>
 
-      <div className="relative z-10 h-screen flex items-center">
+      <div className="relative z-10 h-screen flex flex-col">
         {/* Terminal Toggle Button */}
         <motion.button
-          onClick={() => setShowTerminal(!showTerminal)}
-          className="fixed top-6 right-6 z-50 bg-black/80 border border-green-400 text-green-400 px-4 py-3 rounded-lg font-mono hover:bg-green-500/20 transition-all duration-300 flex items-center space-x-2"
+          onClick={() => {
+            console.log('Toggle clicked! Current state:', isTerminalVisible);
+            setTerminalVisible(!isTerminalVisible);
+            // Scroll to top when switching to scroll mode
+            if (isTerminalVisible) {
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            }
+          }}
+          className="fixed top-4 right-4 z-50 bg-black/90 border border-green-400 text-green-400 px-2 py-1.5 rounded-md font-mono hover:bg-green-500/20 transition-all duration-300 flex items-center space-x-1.5 text-xs backdrop-blur-sm"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          title={showTerminal ? 'Hide Terminal' : 'Show Terminal'}
+          title={isTerminalVisible ? 'Switch to Scroll Mode' : 'Switch to Terminal Mode'}
         >
-          <Terminal size={18} />
-          <span className="hidden sm:inline">{showTerminal ? 'Hide' : 'Show'}</span>
+          <Terminal size={14} />
+          <span className="hidden sm:inline text-xs">
+            {isTerminalVisible ? 'Scroll' : 'Terminal'}
+          </span>
         </motion.button>
 
-        <div className="container mx-auto px-8 lg:px-16 h-full">
-          <div className="flex flex-col lg:flex-row gap-16 items-center justify-center h-full max-w-7xl mx-auto">
+        {/* Main Content Area */}
+        <div className="flex-1 flex items-center">
+
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full w-full overflow-x-hidden">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center h-full max-w-7xl mx-auto w-full">
             {/* Left Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className={`space-y-10 z-20 ${showTerminal ? 'lg:w-1/2' : 'w-full max-w-4xl mx-auto text-center lg:text-left'}`}
+              className={`space-y-6 lg:space-y-10 z-20 w-full overflow-x-hidden ${isTerminalVisible ? 'lg:w-1/2' : 'max-w-4xl mx-auto text-center lg:text-left'}`}
             >
               {/* Greeting */}
               <motion.div
@@ -114,10 +141,10 @@ const Hero3DHacker: React.FC = () => {
                 transition={{ delay: 0.2 }}
                 className="space-y-4"
               >
-                <p className="text-green-400 text-xl font-medium font-mono">
+                <p className="text-green-400 text-base sm:text-lg font-medium font-mono">
                   <span className="text-cyan-400">$</span> whoami
                 </p>
-                <h1 className="text-6xl lg:text-8xl font-bold font-mono leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-mono leading-tight">
                   <span className="text-green-400 glow-text">venomx</span>
                 </h1>
               </motion.div>
@@ -129,21 +156,21 @@ const Hero3DHacker: React.FC = () => {
                 transition={{ delay: 0.4 }}
                 className="h-20 flex items-center justify-center lg:justify-start"
               >
-                <span className="text-2xl lg:text-3xl text-gray-300 mr-3 font-mono">{'>'}</span>
+                <span className="text-base sm:text-lg lg:text-xl text-gray-300 mr-3 font-mono">{'>'}</span>
                 <motion.span
                   key={currentRole}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent font-mono"
+                  className="text-base sm:text-lg lg:text-xl font-semibold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent font-mono"
                 >
                   {roles[currentRole]}
                 </motion.span>
                 <motion.span
                   animate={{ opacity: [1, 0, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
-                  className="text-green-400 ml-1 font-mono text-2xl lg:text-3xl"
+                  className="text-green-400 ml-1 font-mono text-base sm:text-lg lg:text-xl"
                 >
                   _
                 </motion.span>
@@ -154,7 +181,7 @@ const Hero3DHacker: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-xl text-gray-400 leading-relaxed max-w-3xl font-mono text-center lg:text-left"
+                className="text-sm sm:text-base text-gray-400 leading-relaxed max-w-3xl font-mono text-center lg:text-left"
               >
               <span className="text-green-400"># Penetrating systems</span> through{' '}
               <span className="text-cyan-400 font-medium">ethical hacking</span>,{' '}
@@ -207,63 +234,78 @@ const Hero3DHacker: React.FC = () => {
 
 
             {/* Interactive Terminal */}
-            {showTerminal && (
+            {isTerminalVisible && (
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative lg:w-1/2 w-full flex items-center"
+                className="relative lg:w-[45%] w-full flex items-center lg:pr-20"
               >
-                <div className="bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-green-400/50 shadow-2xl w-full max-w-2xl">
-                  <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-green-400 font-mono text-2xl flex items-center space-x-3">
-                      <Terminal size={28} />
-                      <span>Interactive Portfolio Terminal</span>
+                <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 sm:p-4 lg:p-5 border border-green-400/50 shadow-2xl w-full max-w-xl h-[calc(100vh-140px)] sm:h-[calc(100vh-120px)] flex flex-col mt-16 sm:mt-12 lg:mt-0 mr-4 lg:mr-0">
+                  <div className="flex items-center justify-between mb-4 flex-shrink-0">
+                    <h3 className="text-green-400 font-mono text-sm sm:text-base lg:text-lg flex items-center space-x-2">
+                      <Terminal size={16} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                      <span className="truncate">Interactive Portfolio Terminal</span>
                     </h3>
-                    <div className="text-base text-gray-400 font-mono">
+                    <div className="text-xs sm:text-sm text-gray-400 font-mono hidden lg:block">
                       Navigate using commands
                     </div>
                   </div>
-                  <InteractiveTerminal />
-                  <div className="mt-6 text-base text-gray-500 font-mono bg-black/30 p-4 rounded border border-green-400/20">
-                    <div className="text-green-400 mb-3 text-lg">🚀 Quick Start Guide:</div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <div>• Type <span className="text-cyan-400">"help"</span> for all commands</div>
-                      <div>• Try <span className="text-cyan-400">"about"</span> or <span className="text-cyan-400">"projects"</span></div>
-                      <div>• Use <span className="text-cyan-400">"hack"</span> for hacking simulation</div>
-                      <div>• Try <span className="text-cyan-400">"matrix"</span> for matrix effect</div>
+                  <div className="flex-1 min-h-0 overflow-hidden">
+                    <InteractiveTerminal />
+                  </div>
+                  <div className="mt-3 text-xs text-gray-500 font-mono bg-black/30 p-3 rounded border border-green-400/20 flex-shrink-0">
+                    <div className="text-green-400 mb-2 text-xs sm:text-sm">🚀 Quick Start Guide:</div>
+                    <div className="space-y-1">
+                      <div className="break-words">• Type <span className="text-cyan-400">"help"</span> for all commands</div>
+                      <div className="break-words">• Try <span className="text-cyan-400">"about"</span> or <span className="text-cyan-400">"projects"</span></div>
+                      <div className="break-words">• Use <span className="text-cyan-400">"hack"</span> for hacking simulation</div>
+                      <div className="break-words">• Try <span className="text-cyan-400">"matrix"</span> for matrix effect</div>
                     </div>
                   </div>
                 </div>
               </motion.div>
             )}
+            </div>
           </div>
         </div>
 
-        {/* Footer - stays in background */}
-        <footer className="absolute bottom-0 left-0 right-0 z-10 bg-black/30 backdrop-blur-sm border-t border-green-400/20 py-4">
-          <div className="container mx-auto px-8 lg:px-16">
-            <div className="flex flex-col md:flex-row items-center justify-between text-center md:text-left">
-              <div className="flex items-center space-x-3 mb-2 md:mb-0">
-                <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
-                  <span className="text-black font-bold font-mono">V</span>
+        {/* Footer - only shown in terminal mode */}
+        {isTerminalVisible && (
+          <footer className="bg-black/30 backdrop-blur-sm border-t border-green-400/20 py-3 sm:py-4 w-full overflow-x-hidden mt-auto">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2 sm:gap-0">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
+                    <span className="text-black font-bold font-mono text-sm sm:text-base">V</span>
+                  </div>
+                  <span className="text-base sm:text-lg font-bold text-green-400 font-mono">venomx</span>
                 </div>
-                <span className="text-lg font-bold text-green-400 font-mono">venomx</span>
-              </div>
 
-              <div className="text-sm text-gray-400 font-mono">
-                <span>© 2025 venomx</span>
-                <span className="mx-2 text-green-400">•</span>
-                <span>Ethical Hacker & AI Developer</span>
-                <span className="mx-2 text-green-400">•</span>
-                <span>Built with React & TypeScript</span>
+                <div className="text-xs sm:text-sm text-gray-400 font-mono">
+                  <span>© 2025 venomx</span>
+                  <span className="mx-1 sm:mx-2 text-green-400">•</span>
+                  <span className="hidden sm:inline">Ethical Hacker & AI Developer</span>
+                  <span className="sm:hidden">Developer</span>
+                  <span className="mx-1 sm:mx-2 text-green-400">•</span>
+                  <span className="hidden sm:inline">Built with React & TypeScript</span>
+                  <span className="sm:hidden">React</span>
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
+          </footer>
+        )}
       </div>
-    </section>
+      </section>
+
+      {/* Scrollable Layout - shown when terminal is hidden */}
+      {!isTerminalVisible && (
+        <div className="w-full overflow-x-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900">
+          <ScrollableLayout />
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -12,19 +12,45 @@
   body {
     @apply bg-dark-900 text-white font-sans antialiased;
     margin: 0;
-    overflow: hidden; /* Prevent all scrolling for single page app */
-    height: 100vh; /* Full viewport height */
+    overflow: hidden !important; /* Force hidden to prevent scrollbar flash */
+    height: 100vh !important; /* Fixed height for terminal mode */
+    max-height: 100vh !important; /* Ensure no overflow */
   }
 
   html {
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden !important; /* Force hidden to prevent scrollbar flash */
+    height: 100vh !important; /* Fixed height for terminal mode */
+    max-height: 100vh !important; /* Ensure no overflow */
+  }
+
+  /* Classes to control scrolling based on navigation mode */
+  .scroll-mode {
+    overflow: auto !important;
+    height: auto !important;
+  }
+
+  .scroll-mode body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
   }
 }
 
 @layer components {
   .glass-effect {
     @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .scrollbar-hide {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 
   .cyber-border {

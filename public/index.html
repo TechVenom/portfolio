@@ -38,8 +38,56 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>venomx</title>
+
+    <!-- Prevent scrollbar flash by ensuring terminal mode is applied immediately -->
+    <style>
+      /* Force terminal mode styles immediately */
+      html, body {
+        overflow: hidden !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+      }
+
+      /* Hide any potential scrollbars during loading */
+      ::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      * {
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
+      }
+    </style>
   </head>
   <body>
+    <!-- Immediately apply correct mode to prevent scrollbar flash -->
+    <script>
+      // Check localStorage for terminal mode preference
+      let isTerminalMode = true; // Default to terminal mode
+      try {
+        const saved = localStorage.getItem('portfolio-terminal-mode');
+        if (saved !== null) {
+          isTerminalMode = JSON.parse(saved);
+        }
+      } catch (e) {
+        // Ignore localStorage errors, use default
+      }
+
+      if (isTerminalMode) {
+        // Apply terminal mode styles immediately
+        document.documentElement.classList.remove('scroll-mode');
+        document.documentElement.style.overflow = 'hidden';
+        document.documentElement.style.height = '100vh';
+        document.documentElement.style.maxHeight = '100vh';
+        document.body.style.overflow = 'hidden';
+        document.body.style.height = '100vh';
+        document.body.style.maxHeight = '100vh';
+      } else {
+        // Apply scroll mode styles immediately
+        document.documentElement.classList.add('scroll-mode');
+      }
+    </script>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

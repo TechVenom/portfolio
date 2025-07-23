@@ -7,10 +7,11 @@ import {
   Shield,
   Eye,
   Terminal,
-  Zap,
   Code,
   Star,
-  GitFork
+  GitFork,
+  Calendar,
+  MapPin
 } from 'lucide-react';
 
 const Projects: React.FC = () => {
@@ -25,7 +26,8 @@ const Projects: React.FC = () => {
       title: 'ShadowCloak',
       subtitle: 'Advanced Privacy & Anonymity Suite',
       description: 'Professional cybersecurity toolkit with modular architecture for privacy protection and anonymity. Features comprehensive tools for secure communications, identity protection, and digital footprint management.',
-      image: '/api/placeholder/600/400',
+      period: '2024 - Present',
+      status: 'Active Development',
       technologies: ['Shell', 'Python', 'Bash', 'Linux', 'Cryptography'],
       category: 'Cybersecurity',
       icon: Shield,
@@ -43,14 +45,16 @@ const Projects: React.FC = () => {
         stars: 15,
         forks: 8,
         language: 'Shell'
-      }
+      },
+      position: 'left'
     },
     {
       id: 2,
       title: 'ShadowVeil',
       subtitle: 'Next-Gen Security Framework',
       description: 'Advanced security framework designed for modern threat detection and prevention. Implements cutting-edge algorithms for real-time security monitoring and automated response systems.',
-      image: '/api/placeholder/600/400',
+      period: '2023 - 2024',
+      status: 'Production Ready',
       technologies: ['Python', 'AI/ML', 'Security', 'Automation', 'Monitoring'],
       category: 'AI Security',
       icon: Eye,
@@ -68,14 +72,16 @@ const Projects: React.FC = () => {
         stars: 23,
         forks: 12,
         language: 'Python'
-      }
+      },
+      position: 'right'
     },
     {
       id: 3,
       title: 'AI Agent Framework',
       subtitle: 'Intelligent Autonomous Systems',
       description: 'Comprehensive framework for building and deploying AI agents with advanced decision-making capabilities. Features multi-agent coordination, learning algorithms, and real-time adaptation.',
-      image: '/api/placeholder/600/400',
+      period: '2023 - Present',
+      status: 'Research & Development',
       technologies: ['Python', 'TensorFlow', 'PyTorch', 'OpenAI', 'FastAPI'],
       category: 'AI Development',
       icon: Terminal,
@@ -93,34 +99,19 @@ const Projects: React.FC = () => {
         stars: 45,
         forks: 18,
         language: 'Python'
-      }
+      },
+      position: 'left'
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3
-      }
-    }
-  };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0
-    }
-  };
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden">
+    <section id="projects" className="py-20 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Floating particles */}
-        {[...Array(40)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-purple-400 rounded-full opacity-30"
@@ -129,157 +120,93 @@ const Projects: React.FC = () => {
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -40, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.2, 0.8, 0.2],
+              y: [0, -30, 0],
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
-              duration: 4 + Math.random() * 2,
+              duration: 3 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
             }}
           />
         ))}
-
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/10 to-transparent" />
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom section-padding relative z-10">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-4">
             Featured <span className="glow-text">Projects</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Explore my latest work in AI development, cybersecurity, and innovative software solutions. 
-            Each project represents a unique challenge solved with cutting-edge technology.
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            A timeline of my innovative projects in AI development, cybersecurity, and software solutions
           </p>
         </motion.div>
 
-        {/* 3D Project Showcase - Temporarily Disabled */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="h-32 mb-16 flex items-center justify-center"
-        >
-          <div className="text-center">
-            <div className="text-primary-400 text-lg font-medium mb-2">🎯 3D Project Showcase</div>
-            <p className="text-gray-400">Interactive 3D project cards coming soon...</p>
-          </div>
-        </motion.div>
+        <div className="relative max-w-6xl mx-auto">
+          {/* Central Timeline Line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-500 via-cyan-500 to-purple-500 opacity-30"></div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="space-y-12"
-        >
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              variants={itemVariants}
-              className={`grid lg:grid-cols-2 gap-8 items-center ${
-                index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-              }`}
-            >
-              {/* Project Image */}
-              <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+          {/* Timeline Items */}
+          <div className="space-y-12">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, x: project.position === 'left' ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className={`relative flex items-center ${
+                  project.position === 'left' ? 'justify-start' : 'justify-end'
+                }`}
+              >
+                {/* Timeline Node */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    className={`w-12 h-12 rounded-full bg-gradient-to-r ${project.color} flex items-center justify-center text-white shadow-lg`}
+                  >
+                    <project.icon size={20} />
+                  </motion.div>
+                </div>
+
+                {/* Timeline Card */}
                 <motion.div
-                  whileHover={{
-                    scale: 1.05,
-                    rotateY: index % 2 === 0 ? 5 : -5,
-                    rotateX: 2,
-                    z: 50
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="relative group"
-                  style={{ transformStyle: 'preserve-3d' }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  className={`w-5/12 ${project.position === 'left' ? 'mr-auto pr-8' : 'ml-auto pl-8'}`}
                 >
-                  {/* Floating particles around the card */}
-                  {[...Array(8)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-60"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                      }}
-                      animate={{
-                        y: [0, -20, 0],
-                        opacity: [0.3, 1, 0.3],
-                      }}
-                      transition={{
-                        duration: 2 + Math.random(),
-                        repeat: Infinity,
-                        delay: Math.random() * 2,
-                      }}
-                    />
-                  ))}
-
-                  <div className="glass-effect rounded-xl overflow-hidden cyber-border shadow-2xl">
-                    <div className="aspect-video bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center relative">
-                      {/* Background pattern */}
-                      <div className="absolute inset-0 opacity-10">
-                        <div className="h-full w-full" style={{
-                          backgroundImage: `
-                            linear-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px)
-                          `,
-                          backgroundSize: '20px 20px'
-                        }}></div>
+                  <div className="bg-dark-800/50 backdrop-blur-md border border-gray-700/50 rounded-xl p-6 shadow-xl">
+                    {/* Header */}
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center space-x-2">
+                          <Calendar className="w-4 h-4 text-purple-400" />
+                          <span className="text-sm text-purple-400 font-medium">{project.period}</span>
+                        </div>
+                        <span className={`px-3 py-1 bg-gradient-to-r ${project.color} rounded-full text-white text-xs font-medium`}>
+                          {project.category}
+                        </span>
                       </div>
-
-                      <motion.div
-                        className={`w-24 h-24 bg-gradient-to-r ${project.color} rounded-full flex items-center justify-center shadow-lg`}
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.8 }}
-                      >
-                        <project.icon size={40} className="text-white" />
-                      </motion.div>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="flex space-x-4">
-                        <motion.a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 hover:border-primary-500/50 transition-colors"
-                        >
-                          <Github size={20} className="text-white" />
-                        </motion.a>
-                        <motion.a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 hover:border-primary-500/50 transition-colors"
-                        >
-                          <ExternalLink size={20} className="text-white" />
-                        </motion.a>
+                      <h3 className="text-xl font-semibold text-white mb-1">{project.title}</h3>
+                      <div className="flex items-center space-x-2 text-gray-400 mb-2">
+                        <span className="font-medium">{project.subtitle}</span>
+                        <span>•</span>
+                        <div className="flex items-center space-x-1">
+                          <MapPin className="w-3 h-3" />
+                          <span className="text-sm">{project.status}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              </div>
 
-              {/* Project Content */}
-              <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
-                <div>
-                  <div className="flex items-center space-x-3 mb-2">
-                    <span className={`px-3 py-1 bg-gradient-to-r ${project.color} rounded-full text-white text-sm font-medium`}>
-                      {project.category}
-                    </span>
-                    <div className="flex items-center space-x-4 text-sm text-gray-400">
+                    {/* Description */}
+                    <p className="text-gray-300 mb-4 leading-relaxed">{project.description}</p>
+
+                    {/* Stats */}
+                    <div className="flex items-center space-x-4 text-sm text-gray-400 mb-4">
                       <div className="flex items-center space-x-1">
                         <Star size={14} />
                         <span>{project.stats.stars}</span>
@@ -293,73 +220,50 @@ const Projects: React.FC = () => {
                         <span>{project.stats.language}</span>
                       </div>
                     </div>
-                  </div>
-                  <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-lg text-primary-400 font-medium mb-4">{project.subtitle}</p>
-                  <p className="text-gray-400 leading-relaxed">{project.description}</p>
-                </div>
 
-                {/* Features */}
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
-                  <div className="grid grid-cols-2 gap-2">
-                    {project.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center space-x-2">
-                        <Zap size={14} className="text-primary-400 flex-shrink-0" />
-                        <span className="text-gray-300 text-sm">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 text-xs bg-purple-600/20 text-purple-400 rounded-full border border-purple-500/30"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
 
-                {/* Technologies */}
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-3">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 hover:border-primary-500/30 transition-colors"
+                    {/* Action Buttons */}
+                    <div className="flex space-x-3">
+                      <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center space-x-2 px-4 py-2 bg-gray-700/50 hover:bg-gray-600/50 rounded-lg text-sm text-gray-300 hover:text-white transition-colors"
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        <Github size={16} />
+                        <span>Code</span>
+                      </motion.a>
+                      <motion.a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`flex items-center space-x-2 px-4 py-2 bg-gradient-to-r ${project.color} rounded-lg text-sm text-white hover:opacity-90 transition-opacity`}
+                      >
+                        <ExternalLink size={16} />
+                        <span>Demo</span>
+                      </motion.a>
+                    </div>
                   </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex space-x-4">
-                  <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="btn-secondary group"
-                  >
-                    <span className="flex items-center space-x-2">
-                      <Github size={18} />
-                      <span>View Code</span>
-                    </span>
-                  </motion.a>
-                  <motion.a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="btn-primary group"
-                  >
-                    <span className="flex items-center space-x-2">
-                      <ExternalLink size={18} />
-                      <span>Live Demo</span>
-                    </span>
-                  </motion.a>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
