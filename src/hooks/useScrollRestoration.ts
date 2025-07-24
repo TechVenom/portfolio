@@ -35,21 +35,40 @@ export const useScrollRestoration = (options: ScrollRestorationOptions = {}) => 
 };
 
 export const storeScrollPosition = (section: string = 'projects') => {
-  sessionStorage.setItem('portfolioScrollPosition', window.scrollY.toString());
-  sessionStorage.setItem('portfolioReturnSection', section);
+  try {
+    sessionStorage.setItem('portfolioScrollPosition', window.scrollY.toString());
+    sessionStorage.setItem('portfolioReturnSection', section);
+  } catch (error) {
+    // Handle cases where sessionStorage is not available
+    console.warn('Could not store scroll position:', error);
+  }
 };
 
 export const getStoredScrollData = () => {
-  const scrollPosition = sessionStorage.getItem('portfolioScrollPosition');
-  const returnSection = sessionStorage.getItem('portfolioReturnSection');
-  
-  return {
-    scrollPosition: scrollPosition ? parseInt(scrollPosition) : null,
-    returnSection: returnSection || 'projects'
-  };
+  try {
+    const scrollPosition = sessionStorage.getItem('portfolioScrollPosition');
+    const returnSection = sessionStorage.getItem('portfolioReturnSection');
+
+    return {
+      scrollPosition: scrollPosition ? parseInt(scrollPosition) : null,
+      returnSection: returnSection || 'projects'
+    };
+  } catch (error) {
+    // Handle cases where sessionStorage is not available
+    console.warn('Could not get stored scroll data:', error);
+    return {
+      scrollPosition: null,
+      returnSection: 'projects'
+    };
+  }
 };
 
 export const clearStoredScrollData = () => {
-  sessionStorage.removeItem('portfolioScrollPosition');
-  sessionStorage.removeItem('portfolioReturnSection');
+  try {
+    sessionStorage.removeItem('portfolioScrollPosition');
+    sessionStorage.removeItem('portfolioReturnSection');
+  } catch (error) {
+    // Handle cases where sessionStorage is not available
+    console.warn('Could not clear stored scroll data:', error);
+  }
 };

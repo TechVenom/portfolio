@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { storeScrollPosition } from '../../hooks/useScrollRestoration';
+
 import {
   Github,
   ExternalLink,
@@ -159,6 +159,9 @@ const Projects: React.FC = () => {
     return yearB - yearA;
   });
 
+  // Ensure we have valid data before rendering SVG elements
+  const hasValidProjects = allProjects && allProjects.length > 0;
+
   const renderTimelineProject = (project: any, index: number) => {
     const isLeft = index % 2 === 0;
 
@@ -263,7 +266,6 @@ const Projects: React.FC = () => {
         >
           <div
             onClick={() => {
-              storeScrollPosition('projects');
               navigate(`/project/${project.id}`);
             }}
             className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-gray-700/50 rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-5 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 relative overflow-hidden cursor-pointer group"
@@ -327,7 +329,6 @@ const Projects: React.FC = () => {
                 <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
-                    storeScrollPosition('projects');
                     navigate(`/project/${project.id}`);
                   }}
                   whileHover={{ scale: 1.02, y: -1 }}
@@ -517,18 +518,22 @@ const Projects: React.FC = () => {
                 transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
               />
 
-              {/* Animated Dots along the path */}
-              {[...Array(allProjects.length * 3)].map((_, i) => {
+              {/* Animated Dots along the path - Only render if allProjects has data */}
+              {hasValidProjects && [...Array(allProjects.length * 3)].map((_, i) => {
                 const totalHeight = allProjects.length * 350 + 200;
                 const progress = (i + 1) / (allProjects.length * 3 + 1);
                 const y = 50 + progress * (totalHeight - 100);
                 const x = 100 + Math.sin(progress * Math.PI * allProjects.length * 0.5) * 25;
 
+                // Ensure coordinates are valid numbers
+                const safeX = isNaN(x) ? 100 : x;
+                const safeY = isNaN(y) ? 50 : y;
+
                 return (
                   <motion.circle
                     key={i}
-                    cx={x}
-                    cy={y}
+                    cx={safeX}
+                    cy={safeY}
                     r="2"
                     fill="#ffffff"
                     initial={{ opacity: 0, scale: 0 }}
@@ -543,68 +548,78 @@ const Projects: React.FC = () => {
                 );
               })}
 
-              {/* Moving particle effects */}
-              <motion.circle
-                cx="100"
-                cy="50"
-                r="3"
-                fill="#00ffff"
-                opacity="0.8"
-                animate={{
-                  cy: [50, allProjects.length * 350 + 150],
-                  cx: (() => {
-                    const points = [];
-                    for (let i = 0; i <= 6; i++) {
-                      const progress = i / 6;
-                      points.push(100 + Math.sin(progress * Math.PI * allProjects.length * 0.5) * 25);
-                    }
-                    return points;
-                  })()
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              />
+              {/* Moving particle effects - Only render if allProjects has data */}
+              {hasValidProjects && (
+                <>
+                  <motion.circle
+                    cx={100}
+                    cy={50}
+                    r="3"
+                    fill="#00ffff"
+                    opacity="0.8"
+                    animate={{
+                      cy: [50, allProjects.length * 350 + 150],
+                      cx: (() => {
+                        const points = [];
+                        for (let i = 0; i <= 6; i++) {
+                          const progress = i / 6;
+                          const value = 100 + Math.sin(progress * Math.PI * allProjects.length * 0.5) * 25;
+                          points.push(isNaN(value) ? 100 : value);
+                        }
+                        return points;
+                      })()
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
 
-              {/* Secondary particle */}
-              <motion.circle
-                cx="100"
-                cy="50"
-                r="2"
-                fill="#ff00ff"
-                opacity="0.6"
-                animate={{
-                  cy: [50, allProjects.length * 350 + 150],
-                  cx: (() => {
-                    const points = [];
-                    for (let i = 0; i <= 6; i++) {
-                      const progress = i / 6;
-                      points.push(100 + Math.sin((progress + 0.5) * Math.PI * allProjects.length * 0.5) * 25);
-                    }
-                    return points;
-                  })()
-                }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: 2
-                }}
-              />
+                  {/* Secondary particle */}
+                  <motion.circle
+                    cx={100}
+                    cy={50}
+                    r="2"
+                    fill="#ff00ff"
+                    opacity="0.6"
+                    animate={{
+                      cy: [50, allProjects.length * 350 + 150],
+                      cx: (() => {
+                        const points = [];
+                        for (let i = 0; i <= 6; i++) {
+                          const progress = i / 6;
+                          const value = 100 + Math.sin((progress + 0.5) * Math.PI * allProjects.length * 0.5) * 25;
+                          points.push(isNaN(value) ? 100 : value);
+                        }
+                        return points;
+                      })()
+                    }}
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      ease: "linear",
+                      delay: 2
+                    }}
+                  />
+                </>
+              )}
 
-              {/* Road markers */}
-              {[...Array(allProjects.length)].map((_, i) => {
+              {/* Road markers - Only render if allProjects has data */}
+              {hasValidProjects && [...Array(allProjects.length)].map((_, i) => {
                 const totalHeight = allProjects.length * 350 + 200;
                 const y = 50 + (i + 1) * (totalHeight - 100) / (allProjects.length + 1);
                 const x = 100 + Math.sin((i + 1) * Math.PI * 0.5) * 25;
 
+                // Ensure values are valid numbers
+                const safeX = isNaN(x) ? 100 : x;
+                const safeY = isNaN(y) ? 50 : y;
+
                 return (
                   <motion.rect
                     key={`marker-${i}`}
-                    x={x - 1}
-                    y={y - 8}
+                    x={safeX - 1}
+                    y={safeY - 8}
                     width="2"
                     height="16"
                     fill="#ffffff"
@@ -622,17 +637,21 @@ const Projects: React.FC = () => {
                 );
               })}
 
-              {/* Sparkle effects */}
-              {[...Array(15)].map((_, i) => {
+              {/* Sparkle effects - Only render if allProjects has data */}
+              {hasValidProjects && [...Array(15)].map((_, i) => {
                 const totalHeight = allProjects.length * 350 + 200;
                 const x = 50 + Math.random() * 100;
                 const y = 50 + Math.random() * (totalHeight - 100);
 
+                // Ensure coordinates are valid numbers
+                const safeX = isNaN(x) ? 75 : x;
+                const safeY = isNaN(y) ? 50 : y;
+
                 return (
                   <motion.circle
                     key={`sparkle-${i}`}
-                    cx={x}
-                    cy={y}
+                    cx={safeX}
+                    cy={safeY}
                     r="0.5"
                     fill="#ffffff"
                     animate={{

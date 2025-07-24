@@ -219,17 +219,21 @@ const Timeline: React.FC = () => {
                 transition={{ duration: 2.5, ease: "easeInOut", delay: 0.5 }}
               />
 
-              {/* Animated milestone dots */}
-              {timelineData.map((_, i) => {
+              {/* Animated milestone dots - Only render if timelineData exists */}
+              {timelineData && timelineData.length > 0 && timelineData.map((_, i) => {
                 const progress = (i + 1) / (timelineData.length + 1);
                 const y = progress * 1500;
                 const x = 75 + Math.sin(progress * Math.PI * 3) * 15;
 
+                // Ensure coordinates are valid numbers
+                const safeX = isNaN(x) ? 75 : x;
+                const safeY = isNaN(y) ? 0 : y;
+
                 return (
                   <motion.circle
                     key={`milestone-${i}`}
-                    cx={x}
-                    cy={y}
+                    cx={safeX}
+                    cy={safeY}
                     r="2"
                     fill="#ffffff"
                     initial={{ opacity: 0, scale: 0 }}
@@ -246,8 +250,8 @@ const Timeline: React.FC = () => {
 
               {/* Moving progress indicator */}
               <motion.circle
-                cx="75"
-                cy="0"
+                cx={75}
+                cy={0}
                 r="3"
                 fill="#60a5fa"
                 opacity="0.9"
@@ -267,11 +271,15 @@ const Timeline: React.FC = () => {
                 const x = 40 + Math.random() * 70;
                 const y = Math.random() * 1500;
 
+                // Ensure coordinates are valid numbers
+                const safeX = isNaN(x) ? 75 : x;
+                const safeY = isNaN(y) ? 0 : y;
+
                 return (
                   <motion.circle
                     key={`journey-sparkle-${i}`}
-                    cx={x}
-                    cy={y}
+                    cx={safeX}
+                    cy={safeY}
                     r="0.5"
                     fill="#ffffff"
                     animate={{

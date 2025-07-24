@@ -94,7 +94,11 @@ const ProjectActions: React.FC<ProjectActionsProps> = ({ project }) => {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-700/50">
         {/* Back Button */}
         <motion.button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/', {
+            state: {
+              showSection: 'projects'
+            }
+          })}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="flex items-center space-x-2 px-4 py-2 text-gray-400 hover:text-white transition-colors duration-300"

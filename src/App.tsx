@@ -12,26 +12,22 @@ import Testimonials from './components/sections/Testimonials';
 import Overview from './components/sections/Overview';
 import ProjectDetail from './components/ProjectDetail';
 import { SectionProvider, useSectionContext } from './context/SectionContext';
-import { useScrollRestoration } from './hooks/useScrollRestoration';
+// import { useScrollRestoration } from './hooks/useScrollRestoration';
 
 const HomePage: React.FC = () => {
   const { navigationMode, showSection } = useSectionContext();
   const location = useLocation();
 
-  // Use the scroll restoration hook
-  useScrollRestoration({ delay: 300, behavior: 'smooth' });
+  // Use the scroll restoration hook only if needed
+  // useScrollRestoration({ delay: 300, behavior: 'smooth' });
 
   // Handle navigation state when returning from project detail pages
   useEffect(() => {
-    if (location.state && location.state.showSection) {
+    if (location.state && location.state.showSection && navigationMode === 'terminal') {
       const sectionToShow = location.state.showSection;
-
-      // Small delay to ensure the page is loaded
-      setTimeout(() => {
-        showSection(sectionToShow);
-      }, 100);
+      showSection(sectionToShow);
     }
-  }, [location.state, showSection]);
+  }, [location.state, showSection, navigationMode]);
 
   return (
     <Layout>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useSectionContext } from '../../context/SectionContext';
@@ -19,10 +19,41 @@ const getZIndex = (sectionName: string): number => {
 };
 
 const SectionOverlay: React.FC<SectionOverlayProps> = ({ sectionName, title, children }) => {
-  const { isSectionVisible, hideSection } = useSectionContext();
+  const { isSectionVisible, hideSection, navigationMode } = useSectionContext();
   const zIndex = getZIndex(sectionName);
 
-  if (!isSectionVisible(sectionName)) {
+  const handleClose = React.useCallback(() => {
+    hideSection(sectionName);
+  }, [hideSection, sectionName]);
+
+  const handleBackdropClick = React.useCallback((e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  }, [handleClose]);
+
+  // Check if section is visible for the effect
+  const isVisible = isSectionVisible(sectionName);
+  const isTerminalMode = navigationMode === 'terminal';
+
+  // Handle ESC key to close overlay - ALWAYS call hooks before any returns
+  useEffect(() => {
+    if (!isTerminalMode || !isVisible) {
+      return; // Don't add event listener if overlay is not visible
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleClose, isTerminalMode, isVisible]);
+
+  // Don't render overlay if not in terminal mode or not visible
+  if (!isTerminalMode || !isVisible) {
     return null;
   }
 
@@ -44,11 +75,7 @@ const SectionOverlay: React.FC<SectionOverlayProps> = ({ sectionName, title, chi
         }}
         className="fixed inset-0 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
         style={{ zIndex }}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            hideSection(sectionName);
-          }
-        }}
+        onClick={handleBackdropClick}
       >
         <motion.div
           initial={{ opacity: 0, rotateX: -15 }}
@@ -75,8 +102,9 @@ const SectionOverlay: React.FC<SectionOverlayProps> = ({ sectionName, title, chi
               )}
             </div>
             <button
-              onClick={() => hideSection(sectionName)}
+              onClick={handleClose}
               className="text-gray-400 hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-red-500/20"
+              aria-label="Close overlay"
             >
               <X size={24} />
             </button>

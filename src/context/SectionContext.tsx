@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 
 interface SectionContextType {
   visibleSections: Set<string>;
@@ -47,7 +47,7 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({ children }) =>
   // Navigation mode depends on terminal visibility
   const navigationMode: 'terminal' | 'scroll' = isTerminalVisible ? 'terminal' : 'scroll';
 
-  const showSection = (sectionName: string) => {
+  const showSection = useCallback((sectionName: string) => {
     // In terminal mode, show as overlay
     // In scroll mode, this function is not used as all sections are always visible
     if (navigationMode === 'terminal') {
@@ -57,19 +57,21 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({ children }) =>
         return newSet;
       });
     }
-  };
+  }, [navigationMode]);
 
-  const hideSection = (sectionName: string) => {
+  const hideSection = useCallback((sectionName: string) => {
     setVisibleSections(prev => {
       const newSet = new Set(prev);
       newSet.delete(sectionName);
+      // Always keep home visible
+      newSet.add('home');
       return newSet;
     });
-  };
+  }, []);
 
-  const isSectionVisible = (sectionName: string) => {
+  const isSectionVisible = useCallback((sectionName: string) => {
     return visibleSections.has(sectionName);
-  };
+  }, [visibleSections]);
 
   const showAllSections = () => {
     const allSections = new Set<string>();
@@ -84,11 +86,11 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({ children }) =>
     setVisibleSections(allSections);
   };
 
-  const hideAllSections = () => {
+  const hideAllSections = useCallback(() => {
     const homeOnly = new Set<string>();
     homeOnly.add('home');
     setVisibleSections(homeOnly); // Always keep home visible
-  };
+  }, []);
 
   const setTerminalVisible = (visible: boolean) => {
     setIsTerminalVisible(visible);
@@ -98,9 +100,11 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({ children }) =>
     } catch {
       // Ignore localStorage errors
     }
-    // When switching to scroll mode, hide all overlays
+    // When switching to scroll mode, hide all overlays immediately
     if (!visible) {
       hideAllSections();
+      // Force clear all sections to ensure clean state
+      setVisibleSections(new Set(['home']));
     }
   };
 

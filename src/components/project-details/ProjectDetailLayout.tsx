@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ProjectData } from '../../data/projectsData';
-import { getStoredScrollData } from '../../hooks/useScrollRestoration';
+
 import './ProjectDetail.css';
 
 interface ProjectDetailLayoutProps {
@@ -74,14 +74,10 @@ const ProjectDetailLayout: React.FC<ProjectDetailLayoutProps> = ({ project, chil
   }, []);
 
   const handleBackClick = () => {
-    // Get stored scroll position and section using the hook
-    const { scrollPosition, returnSection } = getStoredScrollData();
-
-    // Navigate back to home with restoration data
+    // Simply navigate back to home and show projects section
     navigate('/', {
       state: {
-        showSection: returnSection,
-        scrollPosition: scrollPosition
+        showSection: 'projects'
       }
     });
   };

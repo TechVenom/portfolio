@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, ExternalLink, Terminal } from 'lucide-react';
 import { useSectionContext } from '../../context/SectionContext';
-import { useScrollRestoration } from '../../hooks/useScrollRestoration';
+// import { useScrollRestoration } from '../../hooks/useScrollRestoration';
 import About from '../sections/About';
 import Overview from '../sections/Overview';
 import Timeline from '../sections/Timeline';
@@ -11,21 +11,21 @@ import Projects from '../sections/Projects';
 import Testimonials from '../sections/Testimonials';
 import Contact from '../sections/Contact';
 
+// Move roles array outside component to prevent recreation
+const roles = [
+  'Ethical Hacker',
+  'AI Developer & Researcher',
+  'Cybersecurity Expert',
+  'Full Stack Developer',
+  'AI Agents Specialist'
+];
+
 const ScrollableLayout: React.FC = () => {
-  console.log('ScrollableLayout is rendering!');
   const { setTerminalVisible } = useSectionContext();
   const [currentRole, setCurrentRole] = useState(0);
 
-  // Use the scroll restoration hook for scroll mode
-  useScrollRestoration({ delay: 500, behavior: 'smooth' });
-
-  const roles = [
-    'Ethical Hacker',
-    'AI Developer & Researcher',
-    'Cybersecurity Expert',
-    'Full Stack Developer',
-    'AI Agents Specialist'
-  ];
+  // Disable scroll restoration for now to prevent issues
+  // useScrollRestoration({ delay: 500, behavior: 'smooth' });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,7 +33,7 @@ const ScrollableLayout: React.FC = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [roles.length]);
+  }, []); // Empty dependency array since roles is now constant
 
 
 

@@ -5,20 +5,18 @@ import InteractiveTerminal from './InteractiveTerminal';
 import ScrollableLayout from './ScrollableLayout';
 import { useSectionContext } from '../../context/SectionContext';
 
+// Move roles array outside component to prevent recreation on every render
+const roles = [
+  'Ethical Hacker',
+  'AI Developer & Researcher',
+  'Cybersecurity Expert',
+  'Full Stack Developer',
+  'AI Agents Specialist'
+];
+
 const Hero3DHacker: React.FC = () => {
   const { isTerminalVisible, setTerminalVisible, navigationMode } = useSectionContext();
   const [currentRole, setCurrentRole] = useState(0);
-
-  // Debug logging
-  console.log('Hero3DHacker render - isTerminalVisible:', isTerminalVisible, 'navigationMode:', navigationMode);
-  
-  const roles = [
-    'Ethical Hacker',
-    'AI Developer & Researcher', 
-    'Cybersecurity Expert',
-    'Full Stack Developer',
-    'AI Agents Specialist'
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,7 +24,7 @@ const Hero3DHacker: React.FC = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [roles.length]);
+  }, []); // Empty dependency array since roles is now constant
 
 
 
@@ -102,7 +100,6 @@ const Hero3DHacker: React.FC = () => {
         {/* Terminal Toggle Button */}
         <motion.button
           onClick={() => {
-            console.log('Toggle clicked! Current state:', isTerminalVisible);
             setTerminalVisible(!isTerminalVisible);
             // Scroll to top when switching to scroll mode
             if (isTerminalVisible) {
