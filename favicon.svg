@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="venomGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff00;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00ffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0080ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" fill="#000000" rx="4"/>
+  
+  <!-- V Shape -->
+  <path d="M6 8 L16 24 L26 8" stroke="url(#venomGradient)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Cyber dots -->
+  <circle cx="8" cy="10" r="1" fill="#00ff00" opacity="0.8"/>
+  <circle cx="24" cy="10" r="1" fill="#00ffff" opacity="0.8"/>
+  <circle cx="16" cy="20" r="1" fill="#0080ff" opacity="0.8"/>
+</svg>
