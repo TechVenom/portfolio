@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -18,7 +17,6 @@ import {
 } from 'lucide-react';
 
 const Projects: React.FC = () => {
-  const navigate = useNavigate();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -266,8 +264,9 @@ const Projects: React.FC = () => {
         >
           <div
             onClick={() => {
-              navigate(`/project/${project.id}`);
+              window.open(`/portfolio/project/${project.id}`, '_blank', 'noopener,noreferrer');
             }}
+            title="Click to view project details in new tab"
             className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-gray-700/50 rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-5 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 relative overflow-hidden cursor-pointer group"
           >
             {/* Animated background glow */}
@@ -329,14 +328,16 @@ const Projects: React.FC = () => {
                 <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/project/${project.id}`);
+                    window.open(`/portfolio/project/${project.id}`, '_blank', 'noopener,noreferrer');
                   }}
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
+                  title="View project details in new tab"
                   className={`flex items-center justify-center space-x-2 px-3 py-2 bg-gradient-to-r ${project.color} rounded-lg text-xs text-white hover:opacity-90 transition-all duration-300 shadow-lg`}
                 >
                   <ExternalLink size={14} />
                   <span className="font-medium">View Details</span>
+                  <span className="text-xs opacity-75 hidden sm:inline ml-1">↗</span>
                 </motion.button>
                 <motion.a
                   href={project.github}

@@ -74,6 +74,8 @@ const AppContent: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/portfolio" element={<HomePage />} />
+      <Route path="/portfolio/project/:id" element={<ProjectDetail />} />
       <Route path="/project/:id" element={<ProjectDetail />} />
     </Routes>
   );

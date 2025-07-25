@@ -122,9 +122,9 @@ export const projectsData: ProjectData[] = [
       'Prevented over 10,000 security incidents'
     ],
     images: [
-      '/images/shadowveil-1.jpg',
-      '/images/shadowveil-2.jpg',
-      '/images/shadowveil-3.jpg'
+      `${process.env.PUBLIC_URL}/images/shadowveil-1.jpg`,
+      `${process.env.PUBLIC_URL}/images/shadowveil-2.jpg`,
+      `${process.env.PUBLIC_URL}/images/shadowveil-3.jpg`
     ],
     techDetails: {
       architecture: 'Microservices architecture with event-driven processing',
@@ -172,9 +172,9 @@ export const projectsData: ProjectData[] = [
       'Open-sourced to benefit the medical community'
     ],
     images: [
-      '/images/brain-tumor.jpeg',
-      '/images/trumor-detection.webp',
-      '/images/tumor-detection-ai.jpg'
+      `${process.env.PUBLIC_URL}/images/brain-tumor.jpeg`,
+      `${process.env.PUBLIC_URL}/images/trumor-detection.webp`,
+      `${process.env.PUBLIC_URL}/images/tumor-detection-ai.jpg`
     ],
     techDetails: {
       architecture: 'CNN with ResNet-50 backbone and custom classification layers',

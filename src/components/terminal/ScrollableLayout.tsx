@@ -39,28 +39,28 @@ const ScrollableLayout: React.FC = () => {
 
   // Home section component
   const HomeSection = () => (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center px-3 sm:px-4 lg:px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="space-y-8 max-w-4xl mx-auto"
+        className="space-y-6 sm:space-y-8 lg:space-y-10 max-w-4xl mx-auto"
       >
-        <p className="text-green-400 text-base sm:text-lg font-medium font-mono">
+        <p className="text-green-400 text-sm sm:text-base lg:text-lg xl:text-xl font-medium font-mono">
           <span className="text-cyan-400">$</span> whoami
         </p>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold font-mono leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold font-mono leading-tight">
           <span className="text-green-400 glow-text">venomx</span>
         </h1>
-        <div className="flex items-center justify-center space-x-3 h-16">
-          <span className="text-lg sm:text-xl text-gray-300 font-mono">{'>'}</span>
-          <span className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent font-mono">
+        <div className="flex items-center justify-center space-x-2 sm:space-x-3 h-12 sm:h-14 lg:h-16">
+          <span className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-300 font-mono">{'>'}</span>
+          <span className="text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent font-mono">
             {roles[currentRole]}
           </span>
           <motion.span
             animate={{ opacity: [1, 0, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
-            className="text-lg sm:text-xl text-green-400 font-mono"
+            className="text-base sm:text-lg lg:text-xl xl:text-2xl text-green-400 font-mono"
           >
             █
           </motion.span>
@@ -75,6 +75,15 @@ const ScrollableLayout: React.FC = () => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-4">
           <motion.button
+            onClick={() => {
+              // Create a temporary link to download the CV
+              const link = document.createElement('a');
+              link.href = '/resume.pdf';
+              link.download = 'VenomX_Resume.pdf';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-lg font-semibold font-mono flex items-center space-x-2 transition-all duration-300"
@@ -83,6 +92,12 @@ const ScrollableLayout: React.FC = () => {
             <span>Download CV</span>
           </motion.button>
           <motion.button
+            onClick={() => {
+              const projectsSection = document.querySelector('#projects');
+              if (projectsSection) {
+                projectsSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="border border-green-400 text-green-400 hover:bg-green-500/20 px-6 py-3 rounded-lg font-semibold font-mono flex items-center space-x-2 transition-all duration-300"
@@ -107,20 +122,20 @@ const ScrollableLayout: React.FC = () => {
   ];
 
   return (
-    <div className="w-full overflow-x-hidden relative pb-16 sm:pb-20">
+    <div className="w-full overflow-x-hidden relative pb-16 sm:pb-20 lg:pb-24">
       {/* Terminal Toggle Button */}
       <motion.button
         onClick={() => {
           setTerminalVisible(true);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        className="fixed top-4 right-4 z-50 bg-black/90 border border-green-400 text-green-400 px-2 py-1.5 rounded-md font-mono hover:bg-green-500/20 transition-all duration-300 flex items-center space-x-1.5 text-xs backdrop-blur-sm"
+        className="fixed top-3 right-3 sm:top-4 sm:right-4 lg:top-6 lg:right-6 z-50 bg-black/90 border border-green-400 text-green-400 px-2 py-1.5 sm:px-3 sm:py-2 lg:px-4 lg:py-2.5 rounded-md font-mono hover:bg-green-500/20 transition-all duration-300 flex items-center space-x-1 sm:space-x-1.5 lg:space-x-2 text-xs sm:text-sm lg:text-base backdrop-blur-sm"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         title="Switch to Terminal Mode"
       >
-        <Terminal size={14} />
-        <span className="hidden sm:inline text-xs">Terminal</span>
+        <Terminal size={12} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+        <span className="hidden sm:inline text-xs lg:text-sm">Terminal</span>
       </motion.button>
       {sections.map((section, index) => (
         <section
@@ -167,7 +182,7 @@ const ScrollableLayout: React.FC = () => {
 
             {/* Contact Links */}
             <div className="flex items-center space-x-3 sm:space-x-4 text-xs">
-              <a href="mailto:venomx0@protonmail.com" className="text-gray-400 hover:text-green-400 transition-colors">
+              <a href="mailto:Techvenom606@proton.me" className="text-gray-400 hover:text-green-400 transition-colors">
                 📧 Email
               </a>
               <span className="text-gray-600">·</span>

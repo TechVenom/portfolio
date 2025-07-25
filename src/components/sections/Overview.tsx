@@ -215,6 +215,12 @@ const Overview: React.FC = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              const projectsSection = document.querySelector('#projects');
+              if (projectsSection) {
+                projectsSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="btn-primary text-lg px-8 py-4"
           >
             Explore Portfolio

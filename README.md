@@ -198,7 +198,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 **venomx**
 - GitHub: [@venomx](https://github.com/venomx)
 - LinkedIn: [venomx](https://linkedin.com/in/venomx)
-- Email: venomx0@protonmail.com
+- Email: Techvenom606@proton.me
 
 ---
 

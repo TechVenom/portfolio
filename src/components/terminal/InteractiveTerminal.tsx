@@ -172,6 +172,7 @@ const InteractiveTerminal: React.FC = () => {
         setTimeout(() => {
           showSection('projects');
           addLine('output', '✓ Projects overlay loaded');
+          addLine('output', '💡 Click "View Details" to open project pages in new tabs');
           addLine('output', 'Click outside overlay or X button to close');
         }, 500);
       }
@@ -420,7 +421,7 @@ const InteractiveTerminal: React.FC = () => {
       name: 'email',
       description: 'Show contact email',
       action: () => {
-        addLine('output', 'Email: venomx0@protonmail.com');
+        addLine('output', 'Email: Techvenom606@proton.me');
         addLine('output', 'Feel free to reach out for collaborations!');
       }
     },
@@ -573,16 +574,16 @@ const InteractiveTerminal: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full h-full bg-black border border-green-400/30 rounded-lg overflow-hidden font-mono text-xs">
+    <div className="w-full h-full bg-black border border-green-400/30 rounded-lg overflow-hidden font-mono text-xs sm:text-sm">
       {/* Terminal Header */}
-      <div className="bg-gray-800 px-2 sm:px-3 py-1.5 sm:py-2 flex items-center justify-between border-b border-green-400/30 flex-shrink-0">
-        <div className="flex items-center space-x-1.5 sm:space-x-2">
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+      <div className="bg-gray-800 px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 lg:py-2.5 flex items-center justify-between border-b border-green-400/30 flex-shrink-0">
+        <div className="flex items-center space-x-1 sm:space-x-1.5 lg:space-x-2">
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 bg-red-500 rounded-full"></div>
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 bg-yellow-500 rounded-full"></div>
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 bg-green-500 rounded-full"></div>
         </div>
-        <div className="text-green-400 text-xs truncate flex-1 text-center">venomx@portfolio:~</div>
-        <div className="text-green-400 text-xs hidden lg:block">
+        <div className="text-green-400 text-xs sm:text-sm lg:text-base truncate flex-1 text-center font-bold">venomx@portfolio:~</div>
+        <div className="text-green-400 text-xs sm:text-sm hidden md:block">
           {new Date().toLocaleTimeString()}
         </div>
       </div>
@@ -622,9 +623,9 @@ const InteractiveTerminal: React.FC = () => {
         </div>
 
         {/* Current Input Line - Fixed at bottom */}
-        <div className="flex-shrink-0 p-2 sm:p-3 lg:p-4 border-t border-green-400/30 bg-black/20">
+        <div className="flex-shrink-0 p-1.5 sm:p-2 lg:p-3 border-t border-green-400/30 bg-black/20">
           <motion.div
-            className="flex items-center text-green-400 bg-black/50 p-1.5 sm:p-2 rounded-lg border-2 border-green-400/50 text-xs shadow-lg shadow-green-400/20"
+            className="flex items-center text-green-400 bg-black/50 p-1 sm:p-1.5 lg:p-2 rounded-lg border-2 border-green-400/50 text-xs shadow-lg shadow-green-400/20"
             animate={{
               borderColor: ['rgba(34, 197, 94, 0.5)', 'rgba(34, 197, 94, 0.8)', 'rgba(34, 197, 94, 0.5)'],
               boxShadow: [
@@ -635,15 +636,18 @@ const InteractiveTerminal: React.FC = () => {
             }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <span className="mr-1 sm:mr-2 text-cyan-400 font-mono flex-shrink-0 text-[10px] sm:text-xs font-bold">venomx@portfolio:~$</span>
+            <span className="mr-1 sm:mr-2 text-cyan-400 font-mono flex-shrink-0 text-[9px] sm:text-[10px] lg:text-xs font-bold">
+              <span className="hidden sm:inline">venomx@portfolio:~$</span>
+              <span className="sm:hidden">$</span>
+            </span>
             <input
               ref={inputRef}
               type="text"
               value={currentInput}
               onChange={(e) => setCurrentInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent outline-none text-green-400 caret-green-400 placeholder-gray-400 font-mono text-[10px] sm:text-xs min-w-0 font-medium"
-              placeholder={isTyping ? "Processing..." : "Type a command..."}
+              className="flex-1 bg-transparent outline-none text-green-400 caret-green-400 placeholder-gray-400 font-mono text-[9px] sm:text-[10px] lg:text-xs min-w-0 font-medium"
+              placeholder={isTyping ? "Processing..." : "Type command..."}
               disabled={isTyping}
               style={{
                 textOverflow: 'ellipsis',
@@ -653,15 +657,16 @@ const InteractiveTerminal: React.FC = () => {
             <motion.span
               animate={{ opacity: [1, 0, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
-              className="text-green-400 font-bold text-[10px] sm:text-xs flex-shrink-0 ml-1"
+              className="text-green-400 font-bold text-[9px] sm:text-[10px] lg:text-xs flex-shrink-0 ml-0.5 sm:ml-1"
             >
               █
             </motion.span>
           </motion.div>
 
           {/* Input Helper Text */}
-          <div className="mt-1 text-[9px] sm:text-[10px] text-gray-500 text-center">
-            Press <span className="text-green-400 font-mono">Enter</span> to execute • <span className="text-green-400 font-mono hidden sm:inline">↑↓</span><span className="text-green-400 font-mono sm:hidden">↑↓</span> for history
+          <div className="mt-1 text-[8px] sm:text-[9px] lg:text-[10px] text-gray-500 text-center">
+            <span className="hidden sm:inline">Press <span className="text-green-400 font-mono">Enter</span> to execute • <span className="text-green-400 font-mono">↑↓</span> for history</span>
+            <span className="sm:hidden"><span className="text-green-400 font-mono">Enter</span> = execute • <span className="text-green-400 font-mono">↑↓</span> = history</span>
           </div>
         </div>
       </div>

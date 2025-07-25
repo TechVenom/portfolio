@@ -15,7 +15,7 @@ const roles = [
 ];
 
 const Hero3DHacker: React.FC = () => {
-  const { isTerminalVisible, setTerminalVisible, navigationMode } = useSectionContext();
+  const { isTerminalVisible, setTerminalVisible, navigationMode, showSection } = useSectionContext();
   const [currentRole, setCurrentRole] = useState(0);
 
   useEffect(() => {
@@ -197,14 +197,21 @@ const Hero3DHacker: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="bg-black/50 border border-green-400/30 rounded-lg p-4 font-mono text-sm backdrop-blur-sm"
+              className="bg-black/60 border border-green-400/30 rounded-lg p-4 font-mono text-sm backdrop-blur-sm"
             >
-              <div className="text-green-400 mb-2">$ cat /proc/venomx/stats</div>
+              <div className="text-green-400 mb-3">$ cat /proc/venomx/uptime</div>
               <div className="space-y-1 text-gray-300">
-                <div><span className="text-cyan-400">projects:</span> 3+</div>
-                <div><span className="text-cyan-400">technologies:</span> 5+</div>
-                <div><span className="text-cyan-400">security_level:</span> <span className="text-green-400">MAXIMUM</span></div>
-                <div><span className="text-cyan-400">status:</span> <span className="text-green-400 animate-pulse">ONLINE</span></div>
+                <div><span className="text-cyan-400">Projects:</span> <span className="text-white">14 active ops</span> <span className="text-gray-500">[4 open-source]</span></div>
+                <div><span className="text-cyan-400">Stack:</span> <span className="text-white">Python, Go, Rust, TS, Docker, Burp, nmap</span></div>
+                <div><span className="text-cyan-400">Clearance:</span> <span className="text-red-400">MAX_SEC_LVL</span> <span className="text-gray-500">[Red Access]</span></div>
+                <div><span className="text-cyan-400">Status:</span> <span className="text-green-400 animate-pulse">ENGAGED & ACTIVE</span> <span className="text-red-400">⚔</span></div>
+              </div>
+              <div className="mt-3 pt-2 border-t border-gray-700/50">
+                <div className="text-xs text-gray-500">
+                  <span>uptime: 1337d 13h 37m</span> <span className="mx-2">|</span>
+                  <span>load: 0.42, 0.69, 1.33</span> <span className="mx-2">|</span>
+                  <span>mem: 95.3% efficiency</span>
+                </div>
               </div>
             </motion.div>
 
@@ -215,13 +222,36 @@ const Hero3DHacker: React.FC = () => {
               transition={{ delay: 1 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <button className="bg-green-500/20 border border-green-400 text-green-400 px-6 py-3 rounded-lg font-mono hover:bg-green-500/30 transition-all duration-300 group">
+              <button
+                onClick={() => {
+                  // Create a temporary link to download the CV
+                  const link = document.createElement('a');
+                  link.href = '/resume.pdf'; // You'll need to add your resume PDF to the public folder
+                  link.download = 'VenomX_Resume.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="bg-green-500/20 border border-green-400 text-green-400 px-6 py-3 rounded-lg font-mono hover:bg-green-500/30 transition-all duration-300 group"
+              >
                 <span className="flex items-center space-x-2">
                   <span>./download_cv.sh</span>
                   <Download size={18} className="group-hover:animate-bounce" />
                 </span>
               </button>
               <button
+                onClick={() => {
+                  if (isTerminalVisible) {
+                    // In terminal mode, show the projects section
+                    showSection('projects');
+                  } else {
+                    // In scroll mode, scroll to projects section
+                    const projectsSection = document.querySelector('#projects');
+                    if (projectsSection) {
+                      projectsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
                 className="bg-cyan-500/20 border border-cyan-400 text-cyan-400 px-6 py-3 rounded-lg font-mono hover:bg-cyan-500/30 transition-all duration-300 group"
               >
                 <span className="flex items-center space-x-2">
@@ -241,15 +271,18 @@ const Hero3DHacker: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 50 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative w-full xl:w-1/2 xl:max-w-2xl 3xl:max-w-3xl flex items-center justify-center xl:justify-start"
+                className="relative w-full xl:w-1/2 xl:max-w-2xl 3xl:max-w-3xl flex items-center justify-center xl:justify-start px-2 sm:px-0"
               >
-                <div className="terminal-container bg-black/40 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-green-400/50 shadow-2xl w-full max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl h-[calc(100vh-160px)] sm:h-[calc(100vh-140px)] lg:h-[calc(100vh-120px)] xl:h-[calc(100vh-100px)] 3xl:h-[calc(100vh-80px)] flex flex-col mt-8 sm:mt-6 xl:mt-0">
-                  <div className="flex items-center justify-between mb-3 sm:mb-4 flex-shrink-0">
-                    <h3 className="text-green-400 font-mono text-xs sm:text-sm lg:text-base xl:text-lg flex items-center space-x-2">
-                      <Terminal size={14} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
-                      <span className="truncate">Interactive Portfolio Terminal</span>
+                <div className="terminal-container bg-black/40 backdrop-blur-sm rounded-lg p-2 sm:p-3 lg:p-4 border border-green-400/50 shadow-2xl w-full max-w-sm sm:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl h-[calc(100vh-180px)] sm:h-[calc(100vh-160px)] md:h-[calc(100vh-140px)] lg:h-[calc(100vh-120px)] xl:h-[calc(100vh-100px)] 3xl:h-[calc(100vh-80px)] flex flex-col mt-6 sm:mt-8 lg:mt-6 xl:mt-0">
+                  <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4 flex-shrink-0">
+                    <h3 className="text-green-400 font-mono text-xs sm:text-sm lg:text-base xl:text-lg flex items-center space-x-1 sm:space-x-2">
+                      <Terminal size={12} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                      <span className="truncate">
+                        <span className="hidden sm:inline">Interactive Portfolio Terminal</span>
+                        <span className="sm:hidden">Terminal</span>
+                      </span>
                     </h3>
-                    <div className="text-xs text-gray-400 font-mono hidden xl:block">
+                    <div className="text-xs text-gray-400 font-mono hidden lg:block">
                       Navigate using commands
                     </div>
                   </div>
@@ -257,12 +290,12 @@ const Hero3DHacker: React.FC = () => {
                     <InteractiveTerminal />
                   </div>
                   <div className="mt-2 sm:mt-3 text-xs text-gray-500 font-mono bg-black/30 p-2 sm:p-3 rounded border border-green-400/20 flex-shrink-0">
-                    <div className="text-green-400 mb-1 sm:mb-2 text-xs">🚀 Quick Start Guide:</div>
+                    <div className="text-green-400 mb-1 sm:mb-2 text-xs font-bold">🚀 Quick Start:</div>
                     <div className="space-y-0.5 sm:space-y-1">
-                      <div className="break-words text-xs">• Type <span className="text-cyan-400">"help"</span> for all commands</div>
-                      <div className="break-words text-xs">• Try <span className="text-cyan-400">"about"</span> or <span className="text-cyan-400">"projects"</span></div>
-                      <div className="break-words text-xs hidden sm:block">• Use <span className="text-cyan-400">"hack"</span> for hacking simulation</div>
-                      <div className="break-words text-xs hidden sm:block">• Try <span className="text-cyan-400">"matrix"</span> for matrix effect</div>
+                      <div className="break-words text-xs">• <span className="text-cyan-400">"help"</span> - all commands</div>
+                      <div className="break-words text-xs">• <span className="text-cyan-400">"about"</span> or <span className="text-cyan-400">"projects"</span></div>
+                      <div className="break-words text-xs hidden sm:block">• <span className="text-cyan-400">"hack"</span> - hacking simulation</div>
+                      <div className="break-words text-xs hidden sm:block">• <span className="text-cyan-400">"matrix"</span> - matrix effect</div>
                     </div>
                   </div>
                 </div>
@@ -274,41 +307,49 @@ const Hero3DHacker: React.FC = () => {
 
         {/* Footer - only shown in terminal mode */}
         {isTerminalVisible && (
-          <footer className="bg-black/40 backdrop-blur-sm border-t border-green-400/20 py-3 sm:py-4 w-full overflow-x-hidden mt-auto">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full">
-              <div className="flex flex-col items-center text-center gap-2 sm:gap-3">
+          <footer className="bg-black/40 backdrop-blur-sm border-t border-green-400/20 py-2 sm:py-3 lg:py-4 w-full overflow-x-hidden mt-auto">
+            <div className="container mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 w-full">
+              <div className="flex flex-col items-center text-center gap-2 sm:gap-3 lg:gap-4">
                 {/* Main Info */}
-                <div className="flex items-center space-x-2 sm:space-x-3">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
-                    <span className="text-black font-bold font-mono text-sm sm:text-base">V</span>
+                <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 lg:gap-3">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
+                      <span className="text-black font-bold font-mono text-xs sm:text-sm lg:text-base">V</span>
+                    </div>
+                    <span className="text-sm sm:text-base lg:text-lg font-bold text-green-400 font-mono">venomx</span>
                   </div>
-                  <span className="text-base sm:text-lg font-bold text-green-400 font-mono">venomx</span>
-                  <span className="text-sm text-gray-400">·</span>
-                  <span className="text-sm text-gray-400">Ethical Hacker & AI Engineer</span>
-                  <span className="text-sm text-gray-400">·</span>
-                  <span className="text-sm text-gray-400">Portfolio v3.0.0</span>
+                  <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-400">
+                    <span className="hidden sm:inline">·</span>
+                    <span>Ethical Hacker & AI Engineer</span>
+                    <span className="hidden lg:inline">·</span>
+                    <span className="hidden lg:inline">Portfolio v3.0.0</span>
+                  </div>
                 </div>
 
                 {/* Contact Links */}
-                <div className="flex items-center space-x-4 sm:space-x-6 text-sm font-mono">
-                  <a href="mailto:venomx0@protonmail.com" className="text-gray-400 hover:text-green-400 transition-colors hover:underline">
-                    📧 venomx0@protonmail.com
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm font-mono">
+                  <a href="mailto:Techvenom606@proton.me" className="text-gray-400 hover:text-green-400 transition-colors hover:underline break-all sm:break-normal">
+                    📧 <span className="hidden sm:inline">Techvenom606@proton.me</span><span className="sm:hidden">Email</span>
                   </a>
-                  <span className="text-gray-600">·</span>
+                  <span className="hidden sm:inline text-gray-600">·</span>
                   <a href="https://github.com/TechVenom" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-400 transition-colors hover:underline">
                     💻 GitHub
                   </a>
-                  <span className="text-gray-600">·</span>
+                  <span className="hidden sm:inline text-gray-600">·</span>
                   <a href="/Professional_Resume_VenomX.md" target="_blank" className="text-gray-400 hover:text-green-400 transition-colors hover:underline">
                     📄 Resume
                   </a>
                 </div>
 
                 {/* Tech Stack & Status */}
-                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs text-gray-500 font-mono">
-                  <span>🛠 Stack: TypeScript · React · Node.js · Python · Docker · TailwindCSS</span>
-                  <span className="hidden sm:inline text-gray-600">·</span>
-                  <span className="text-green-400">🔍 Open to Full-Time / Contract · Remote / Hybrid Roles</span>
+                <div className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-500 font-mono">
+                  <div className="text-center">
+                    <span className="hidden sm:inline">🛠 Stack: TypeScript · React · Node.js · Python · Docker · TailwindCSS</span>
+                    <span className="sm:hidden">🛠 TS · React · Node · Python · Docker</span>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-green-400 text-xs sm:text-sm">🔍 Open to Full-Time / Contract · Remote / Hybrid Roles</span>
+                  </div>
                 </div>
               </div>
             </div>

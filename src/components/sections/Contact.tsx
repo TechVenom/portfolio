@@ -58,15 +58,15 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'venomx0@protonmail.com',
-      href: 'mailto:venomx0@protonmail.com',
+      value: 'Techvenom606@proton.me',
+      href: 'mailto:Techvenom606@proton.me',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Phone,
       label: 'Phone',
       value: 'Available on Request',
-      href: 'mailto:venomx0@protonmail.com?subject=Phone Contact Request',
+      href: 'mailto:Techvenom606@proton.me?subject=Phone Contact Request',
       color: 'from-green-500 to-teal-500'
     },
     {
@@ -88,13 +88,13 @@ const Contact: React.FC = () => {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: 'mailto:venomx0@protonmail.com?subject=LinkedIn Connection Request',
+      href: 'mailto:Techvenom606@proton.me?subject=LinkedIn Connection Request',
       color: 'hover:text-blue-400'
     },
     {
       icon: Twitter,
       label: 'Twitter',
-      href: 'mailto:venomx0@protonmail.com?subject=Social Media Contact',
+      href: 'mailto:Techvenom606@proton.me?subject=Social Media Contact',
       color: 'hover:text-sky-400'
     }
   ];
