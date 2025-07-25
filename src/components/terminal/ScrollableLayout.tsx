@@ -150,24 +150,41 @@ const ScrollableLayout: React.FC = () => {
       ))}
 
       {/* Fixed Footer - visible across all sections */}
-      <footer className="fixed bottom-0 left-0 right-0 z-40 bg-black/80 backdrop-blur-sm border-t border-green-400/20 py-3 sm:py-4">
+      <footer className="fixed bottom-0 left-0 right-0 z-40 bg-black/90 backdrop-blur-sm border-t border-green-400/20 py-2 sm:py-3">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2 sm:gap-0">
+          <div className="flex flex-col items-center text-center gap-1 sm:gap-2">
+            {/* Main Info */}
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold font-mono text-sm sm:text-base">V</span>
+              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
+                <span className="text-black font-bold font-mono text-xs sm:text-sm">V</span>
               </div>
-              <span className="text-base sm:text-lg font-bold text-green-400 font-mono">venomx</span>
+              <span className="text-sm sm:text-base font-bold text-green-400 font-mono">venomx</span>
+              <span className="text-xs text-gray-400">·</span>
+              <span className="text-xs text-gray-400">Ethical Hacker & AI Engineer</span>
+              <span className="text-xs text-gray-400">·</span>
+              <span className="text-xs text-gray-400">Portfolio v3.0.0</span>
             </div>
 
-            <div className="text-xs sm:text-sm text-gray-400 font-mono">
-              <span>© 2025 venomx</span>
-              <span className="mx-1 sm:mx-2 text-green-400">•</span>
-              <span className="hidden sm:inline">Ethical Hacker & AI Developer</span>
-              <span className="sm:hidden">Developer</span>
-              <span className="mx-1 sm:mx-2 text-green-400">•</span>
-              <span className="hidden sm:inline">Built with React & TypeScript</span>
-              <span className="sm:hidden">React</span>
+            {/* Contact Links */}
+            <div className="flex items-center space-x-3 sm:space-x-4 text-xs">
+              <a href="mailto:venomx0@protonmail.com" className="text-gray-400 hover:text-green-400 transition-colors">
+                📧 Email
+              </a>
+              <span className="text-gray-600">·</span>
+              <a href="https://github.com/TechVenom" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-400 transition-colors">
+                💻 GitHub
+              </a>
+              <span className="text-gray-600">·</span>
+              <a href="/Professional_Resume_VenomX.md" target="_blank" className="text-gray-400 hover:text-green-400 transition-colors">
+                📄 Resume
+              </a>
+            </div>
+
+            {/* Tech Stack & Status */}
+            <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 text-xs text-gray-500">
+              <span>🛠 Stack: TypeScript · React · Node.js · Python · Docker · TailwindCSS</span>
+              <span className="hidden sm:inline text-gray-600">·</span>
+              <span className="text-green-400">🔍 Open to Remote · Hybrid · Global Teams</span>
             </div>
           </div>
         </div>

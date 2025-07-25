@@ -65,8 +65,8 @@ const Contact: React.FC = () => {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      value: 'Available on Request',
+      href: 'mailto:venomx0@protonmail.com?subject=Phone Contact Request',
       color: 'from-green-500 to-teal-500'
     },
     {
@@ -82,19 +82,19 @@ const Contact: React.FC = () => {
     {
       icon: Github,
       label: 'GitHub',
-      href: 'https://github.com/venomx',
+      href: 'https://github.com/TechVenom',
       color: 'hover:text-gray-400'
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: '#',
+      href: 'mailto:venomx0@protonmail.com?subject=LinkedIn Connection Request',
       color: 'hover:text-blue-400'
     },
     {
       icon: Twitter,
       label: 'Twitter',
-      href: '#',
+      href: 'mailto:venomx0@protonmail.com?subject=Social Media Contact',
       color: 'hover:text-sky-400'
     }
   ];
