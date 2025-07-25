@@ -2,7 +2,6 @@
   "name": "venomx-portfolio",
   "version": "0.1.0",
   "private": true,
-
   "dependencies": {
     "@react-three/drei": "^10.5.1",
     "@react-three/fiber": "^9.2.0",
@@ -38,7 +37,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build:deploy",
     "deploy": "gh-pages -d build",
-    "build:deploy": "PUBLIC_URL=/portfolio react-scripts build"
+    "build:deploy": "cross-env PUBLIC_URL=/portfolio react-scripts build"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "gh-pages": "^6.3.0"
   }
 }
