@@ -4,7 +4,7 @@ import Layout from './components/layout/Layout';
 import ProjectDetail from './components/ProjectDetail';
 import { SectionProvider, useSectionContext } from './context/SectionContext';
 import Homepage from './components/sections/Homepage';
-import About from './components/sections/About';
+import AboutMe from './components/sections/About';
 import Services from './components/sections/Services';
 import Projects from './components/sections/Projects';
 import Timeline from './components/sections/Timeline';
@@ -27,7 +27,7 @@ const HomePage: React.FC = () => {
 return (
   <Layout>
     <Homepage />
-    <About />
+    <AboutMe />
     <Timeline />
     <Services />
     <Projects />

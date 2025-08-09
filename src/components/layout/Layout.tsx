@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSectionContext } from '../../context/SectionContext';
 import SimpleNavigation from '../navigation/SimpleNavigation';
+import Footer from './Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -36,7 +37,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [navigationMode, location.pathname]);
 
   return (
-    <div className="bg-dark-900 relative h-full">
+    <div className="bg-dark-900 relative min-h-screen flex flex-col">
       {/* Navigation */}
       <SimpleNavigation />
       
@@ -62,9 +63,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
 
       {/* Main Content */}
-      <main className="relative z-10 h-full">
+      <main className="relative z-10 flex-grow pb-4">
         {children}
       </main>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

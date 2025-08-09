@@ -6,33 +6,12 @@ import { motion } from 'framer-motion';
 const Homepage: React.FC = () => {
   // Profile data as specified
   const profileData = {
-    name: "TechVenom",
+    name: "Hezron Paipai",
     title: "Full-Stack Developer & AI Engineer",
     skills: ["React", "Node.js", "Python", "TensorFlow", "Cybersecurity"],
     experience: "5+ years",
     location: "Remote"
   };
-// Colors for the typing effect
-  const colors = [
-    "#ffffff", // White
-    "#a855f7", // Purple
-    "#3b82f6", // Blue
-    "#10b981", // Green
-    "#f59e0b", // Yellow
-    "#ef4444"  // Red
-  ];
-
-  // State for tracking current cursor color
-  const [cursorColor, setCursorColor] = useState(colors[0]);
-
-  // Format the profile code as a string with proper syntax highlighting classes
-  const profileCode = `const profile = {
-  name: "${profileData.name}",
-  title: "${profileData.title}",
-  skills: [${profileData.skills.map(skill => `"${skill}"`).join(', ')}],
-  experience: "${profileData.experience}",
-  location: "${profileData.location}"
-};`;
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -56,11 +35,11 @@ const Homepage: React.FC = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="relative mb-8"
+              className="relative mb-15"
             >
-              <div className="w-48 h-48 rounded-full border-4 border-purple-500 shadow-lg shadow-purple-500/30 overflow-hidden relative">
+              <div className="w-60 h-60 rounded-full border-4 border-purple-500 shadow-lg shadow-purple-500/30 overflow-hidden relative">
                 <img 
-                  src="/images/placeholder.jpg" 
+                  src="/images/cover.png" 
                   alt="TechVenom Profile" 
                   className="w-full h-full object-cover"
                 />
@@ -85,22 +64,8 @@ const Homepage: React.FC = () => {
                 showCursor={false}
                 cursorChar={"|"}
                 backDelay={2000}
-onStringTyped={(arrayPos) => {
-                  // Update cursor color based on the current string position
-                  setCursorColor(colors[arrayPos % colors.length]);
-                }}
                 contentType={'html'}
               />
-{/* Custom blinking cursor that matches text color */}
-              <span 
-                className="ml-1 animate-blink"
-                style={{ 
-                  color: cursorColor,
-                  animation: 'blink 1s infinite'
-                }}
-              >
-                |
-              </span>
             </h1>
 
             {/* Static Tagline */}
