@@ -20,7 +20,7 @@ const ProjectDetailLayout: React.FC<ProjectDetailLayoutProps> = ({ project, chil
     const bodyElement = document.body;
 
     // Remove any navigation mode classes that might prevent scrolling
-    htmlElement.classList.remove('terminal-mode', 'scroll-mode', 'project-detail-page');
+    htmlElement.classList.remove('scroll-mode', 'project-detail-page');
 
     // Add the new scrollable class
     htmlElement.classList.add('project-detail-scrollable');

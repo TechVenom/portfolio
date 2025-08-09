@@ -34,11 +34,10 @@ const SectionOverlay: React.FC<SectionOverlayProps> = ({ sectionName, title, chi
 
   // Check if section is visible for the effect
   const isVisible = isSectionVisible(sectionName);
-  const isTerminalMode = navigationMode === 'terminal';
 
   // Handle ESC key to close overlay - ALWAYS call hooks before any returns
   useEffect(() => {
-    if (!isTerminalMode || !isVisible) {
+    if (!isVisible) {
       return; // Don't add event listener if overlay is not visible
     }
 
@@ -50,10 +49,10 @@ const SectionOverlay: React.FC<SectionOverlayProps> = ({ sectionName, title, chi
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [handleClose, isTerminalMode, isVisible]);
+  }, [handleClose, isVisible]);
 
-  // Don't render overlay if not in terminal mode or not visible
-  if (!isTerminalMode || !isVisible) {
+  // Don't render overlay if not visible
+  if (!isVisible) {
     return null;
   }
 

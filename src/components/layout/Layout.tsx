@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSectionContext } from '../../context/SectionContext';
+import SimpleNavigation from '../navigation/SimpleNavigation';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -17,13 +18,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     // Only apply navigation mode classes on the home page
     if (location.pathname === '/') {
       // Remove all navigation mode classes first
-      htmlElement.classList.remove('scroll-mode', 'terminal-mode', 'project-detail-page');
+      htmlElement.classList.remove('scroll-mode', 'project-detail-page');
 
       // Apply the appropriate class based on navigation mode
       if (navigationMode === 'scroll') {
         htmlElement.classList.add('scroll-mode');
-      } else if (navigationMode === 'terminal') {
-        htmlElement.classList.add('terminal-mode');
       }
     }
     // For project detail pages, don't interfere - let ProjectDetailLayout handle it
@@ -31,17 +30,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     // Cleanup on unmount
     return () => {
       if (location.pathname === '/') {
-        htmlElement.classList.remove('scroll-mode', 'terminal-mode');
+        htmlElement.classList.remove('scroll-mode');
       }
     };
   }, [navigationMode, location.pathname]);
 
   return (
     <div className="bg-dark-900 relative h-full">
+      {/* Navigation */}
+      <SimpleNavigation />
+      
       {/* Background Effects */}
       <div className="fixed inset-0 z-0">
         {/* Animated Grid Background */}
-        <div 
+        <div
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `

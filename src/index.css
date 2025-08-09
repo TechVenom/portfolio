@@ -21,18 +21,6 @@
     overflow-y: auto; /* Allow vertical scroll by default */
   }
 
-  /* Terminal mode specific styles - applied when needed */
-  .terminal-mode {
-    overflow: hidden !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-  }
-
-  .terminal-mode body {
-    overflow: hidden !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-  }
 
   /* Classes to control scrolling based on navigation mode */
   .scroll-mode {
@@ -45,30 +33,6 @@
     max-width: 88rem; /* 1408px */
   }
 
-  /* Responsive terminal adjustments */
-  @media (min-width: 1600px) {
-    .terminal-container {
-      max-width: min(50vw, 800px);
-    }
-  }
-
-  @media (min-width: 1920px) {
-    .terminal-container {
-      max-width: min(45vw, 900px);
-    }
-  }
-
-  @media (min-width: 2560px) {
-    .terminal-container {
-      max-width: min(40vw, 1000px);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .terminal-container {
-      height: calc(100vh - 180px) !important;
-    }
-  }
 
   /* Animated road timeline styles */
   .road-timeline {
@@ -211,13 +175,13 @@
     @apply max-w-7xl mx-auto;
   }
 
-  /* 3D Effects */
-  .card-3d {
+  /* Card Effects */
+  .card-enhanced {
     transform-style: preserve-3d;
     perspective: 1000px;
   }
 
-  .card-3d:hover {
+  .card-enhanced:hover {
     transform: rotateY(5deg) rotateX(2deg) translateZ(20px);
   }
 
@@ -274,5 +238,21 @@
       0 0 30px rgba(59, 130, 246, 0.4),
       0 0 60px rgba(59, 130, 246, 0.3),
       0 0 120px rgba(59, 130, 246, 0.2);
+  }
+  
+  /* Code editor styles */
+  .code-editor {
+    background-color: #1e293b;
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+/* Blinking cursor animation */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .animate-blink {
+    animation: blink 1s infinite;
   }
 }

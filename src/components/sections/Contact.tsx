@@ -58,21 +58,21 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'Techvenom606@proton.me',
-      href: 'mailto:Techvenom606@proton.me',
+      value: 'phezron65@gmail.com',
+      href: 'mailto:phezron65@gmail.com',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: 'Available on Request',
-      href: 'mailto:Techvenom606@proton.me?subject=Phone Contact Request',
+      value: '+254 700 208 735',
+      href: 'tel:+254700208735',
       color: 'from-green-500 to-teal-500'
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Available Worldwide',
+      value: 'Nairobi, Kenya',
       href: '#',
       color: 'from-purple-500 to-pink-500'
     }
@@ -88,13 +88,13 @@ const Contact: React.FC = () => {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: 'mailto:Techvenom606@proton.me?subject=LinkedIn Connection Request',
+      href: 'https://www.linkedin.com/in/hezron-paipai-92013a264/',
       color: 'hover:text-blue-400'
     },
     {
       icon: Twitter,
-      label: 'Twitter',
-      href: 'mailto:Techvenom606@proton.me?subject=Social Media Contact',
+      label: 'Phone',
+      href: 'tel:+254700208735',
       color: 'hover:text-sky-400'
     }
   ];
@@ -118,17 +118,15 @@ const Contact: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* 3D Contact Elements - Temporarily Disabled */}
+        {/* Contact Introduction */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="h-32 mb-12 flex items-center justify-center"
+          className="mb-12 text-center"
         >
-          <div className="text-center">
-            <div className="text-primary-400 text-lg font-medium mb-2">📞 3D Contact Experience</div>
-            <p className="text-gray-400">Interactive 3D contact elements coming soon...</p>
-          </div>
+          <div className="text-primary-400 text-lg font-medium mb-2">📞 Let's Connect</div>
+          <p className="text-gray-400">Choose your preferred way to get in touch</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">

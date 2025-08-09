@@ -1,4 +1,4 @@
-# 🚀 venomx - Interactive Portfolio
+# 🚀 Hezron Paipai - Interactive Portfolio
 
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue.svg)](https://www.typescriptlang.org/)
@@ -17,7 +17,7 @@
 
 ### 🎭 **Dynamic Section Overlays**
 - **Single Page Application** - No scrolling, everything appears as animated overlays
-- **Smooth Animations** - Spring-based animations with scale, fade, and 3D effects
+- **Smooth Animations** - Spring-based animations with scale, fade, and transform effects
 - **Multiple Overlay Support** - View all sections simultaneously with `showall` command
 - **Smart Z-Index Management** - Properly stacked overlays with visual indicators
 
@@ -42,7 +42,6 @@ services     # Show Services section overlay
 contact      # Show Contact section overlay
 timeline     # Show Timeline section overlay
 overview     # Show Overview section overlay
-testimonials # Show Testimonials section overlay
 showall      # Show ALL sections as stacked overlays
 home         # Close all overlays and return to home
 ```
@@ -72,11 +71,9 @@ linkedin     # Open LinkedIn profile
 email        # Show contact email
 ```
 
-### Fun Commands
+### Additional Commands
 ```bash
-matrix       # Enable matrix mode
-hack         # Run hacking simulation
-quote        # Display random quote
+quote        # Display inspirational quote
 ```
 
 ## 🛠️ Tech Stack
@@ -132,7 +129,7 @@ portfolio/
 │   └── favicon.ico
 ├── src/
 │   ├── components/
-│   │   ├── Hero3DHacker.tsx      # Main landing page
+│   │   ├── HeroLayout.tsx        # Main landing page
 │   │   ├── InteractiveTerminal.tsx # Terminal interface
 │   │   ├── SectionOverlay.tsx    # Overlay system
 │   │   ├── About.tsx             # About section

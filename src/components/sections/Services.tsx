@@ -192,7 +192,7 @@ const Services: React.FC = () => {
                 scale: 1.02,
                 z: 20
               }}
-              className="glass-effect rounded-xl p-6 card-hover group glow-box floating-card card-3d"
+              className="glass-effect rounded-xl p-6 card-hover group glow-box floating-card card-enhanced"
               style={{ transformStyle: 'preserve-3d' }}
             >
               {/* Floating particles in card */}
