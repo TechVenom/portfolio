@@ -15,6 +15,7 @@ interface Project {
   icon: React.ElementType;
   tech: string[];
   github: string;
+  live?: string;
   isPrivate?: boolean;
   features: string[];
 }
@@ -29,6 +30,7 @@ const projects: Project[] = [
     icon: Brain,
     tech: ['Python', 'FastAPI', 'LangChain', 'ChromaDB', 'Ollama', 'Tauri'],
     github: '#',
+    live: 'https://venomx-hq.vercel.app/',
     isPrivate: true,
     features: [
       'Self-healing engine with automated error diagnosis & patching',
@@ -388,13 +390,19 @@ const FeaturedProjects: React.FC = () => {
 
                 {/* Action */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  {selected.live && (
+                    <a href={selected.live} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-noir-950 font-semibold text-sm hover:bg-ash-300 transition-colors duration-300">
+                      <ExternalLink size={16} /> Visit Website
+                    </a>
+                  )}
                   {selected.isPrivate ? (
                     <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-ash-600 text-sm">
                       <Shield size={14} /> Private Repository
                     </div>
                   ) : (
                     <a href={selected.github} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-noir-950 font-semibold text-sm hover:bg-ash-300 transition-colors duration-300">
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-ash-400 font-medium text-sm hover:text-white hover:border-white/30 transition-all duration-300">
                       <Github size={16} /> View Source
                     </a>
                   )}
