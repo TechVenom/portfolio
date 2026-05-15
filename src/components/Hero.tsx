@@ -99,14 +99,16 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 section-container text-center max-w-4xl mx-auto py-20 px-6">
-        {/* Status badge */}
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.4 }} className="relative mb-10 inline-block">
-          {/* Background Logo Backdrop */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 opacity-15 pointer-events-none select-none z-0">
-            <img src="/favicon.png" alt="VenomX" className="w-full h-full object-contain grayscale invert" />
+        {/* Branding Logo */}
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.2 }} className="mb-6">
+          <div className="w-32 h-32 mx-auto pointer-events-none select-none mix-blend-screen opacity-80">
+            <img src="/favicon.png" alt="VenomX Technologies" className="w-full h-full object-contain" />
           </div>
-          
-          <span className="relative z-10 inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/10 text-ash-500 text-[11px] font-mono tracking-[0.2em] uppercase bg-noir-950/40 backdrop-blur-sm">
+        </motion.div>
+
+        {/* Status badge */}
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.4 }} className="mb-10">
+          <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/10 text-ash-500 text-[11px] font-mono tracking-[0.2em] uppercase bg-noir-950/40 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse-subtle" />
             Available for work
           </span>
