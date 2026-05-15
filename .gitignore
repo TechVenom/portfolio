@@ -28,3 +28,9 @@ yarn-error.log*
 
 # custom scripts
 /scripts/
+
+# metadata
+PORTFOLIO_UPGRADE_PROMPT.md
+PROFILE.md
+
+.vercel
