@@ -2,7 +2,9 @@
 
 import React, { useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowDown } from 'lucide-react';
 
+/* ── Minimal particle network — monochrome, low density ── */
 const ParticleCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
@@ -16,15 +18,13 @@ const ParticleCanvas: React.FC = () => {
 
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
-    const count = Math.min(Math.floor((w * h) / 14000), 100);
-    const colors = ['rgba(34,197,94,', 'rgba(6,182,212,', 'rgba(124,58,237,'];
+    const count = Math.min(Math.floor((w * h) / 22000), 60);
 
     const pts = Array.from({ length: count }, () => ({
       x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 2 + 0.5,
-      c: colors[Math.floor(Math.random() * 3)],
-      a: Math.random() * 0.5 + 0.2,
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random() * 0.25 + 0.05,
     }));
 
     const draw = () => {
@@ -34,10 +34,10 @@ const ParticleCanvas: React.FC = () => {
         const dx = p.x - mouseRef.current.x;
         const dy = p.y - mouseRef.current.y;
         const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 180) {
-          const f = (180 - d) / 180;
-          p.vx += (dx / d) * f * 0.25;
-          p.vy += (dy / d) * f * 0.25;
+        if (d < 160) {
+          const f = (160 - d) / 160;
+          p.vx += (dx / d) * f * 0.15;
+          p.vy += (dy / d) * f * 0.15;
         }
         p.vx *= 0.99; p.vy *= 0.99;
         p.x += p.vx; p.y += p.vy;
@@ -46,18 +46,18 @@ const ParticleCanvas: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.c + p.a + ')';
+        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
         ctx.fill();
 
         for (let j = i + 1; j < pts.length; j++) {
           const q = pts[j];
           const ex = p.x - q.x, ey = p.y - q.y;
           const ed = Math.sqrt(ex * ex + ey * ey);
-          if (ed < 140) {
+          if (ed < 120) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = p.c + ((1 - ed / 140) * 0.12) + ')';
+            ctx.strokeStyle = `rgba(255,255,255,${(1 - ed / 120) * 0.06})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -83,59 +83,70 @@ const ParticleCanvas: React.FC = () => {
   return <canvas ref={canvasRef} className="absolute inset-0 z-0" style={{ width: '100%', height: '100%' }} />;
 };
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 const Hero: React.FC = () => {
-  const ease = [0.22, 1, 0.36, 1] as const;
   const scroll = (id: string) => { document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' }); };
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParticleCanvas />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-abyss-950/50 via-transparent to-abyss-950" />
+
+      {/* Subtle radial vignette */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-noir-950/30 via-transparent to-noir-950" />
       <div className="absolute inset-0 z-[1]" aria-hidden="true">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-venom-500/[0.06] rounded-full blur-[150px]" />
-        <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-cyber-500/[0.04] rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-white/[0.015] rounded-full blur-[200px]" />
       </div>
 
-      <div className="relative z-10 section-container text-center max-w-5xl mx-auto py-20 px-4">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: ease as any, delay: 0.3 }} className="mb-8">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-venom-500/20 text-venom-400 font-mono text-xs tracking-[0.25em] uppercase">
-            <span className="w-2 h-2 rounded-full bg-venom-500 animate-pulse" />
-            System Online
+      <div className="relative z-10 section-container text-center max-w-4xl mx-auto py-20 px-6">
+        {/* Status badge */}
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.4 }} className="mb-10">
+          <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/10 text-ash-500 text-[11px] font-mono tracking-[0.2em] uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse-subtle" />
+            Available for work
           </span>
         </motion.div>
 
-        <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: ease as any, delay: 0.5 }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[0.95]">
-          <span className="block text-white/90">Architecting</span>
-          <span className="block text-glow-sovereign mt-2">Sovereign Intelligence.</span>
+        {/* Main headline */}
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: ease as any, delay: 0.6 }}
+          className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold tracking-[-0.04em] leading-[1.05] mb-8">
+          <span className="block text-white">Hezron Paipai</span>
         </motion.h1>
 
-        <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: ease as any, delay: 0.7 }}
-          className="text-lg sm:text-xl text-white/40 font-light max-w-2xl mx-auto mb-12 leading-relaxed">
-          <span className="text-venom-400/80">Full-Stack Developer</span>
-          <span className="mx-3 text-white/20">·</span>
-          <span className="text-cyber-400/80">AI Architect</span>
-          <span className="mx-3 text-white/20">·</span>
-          <span className="text-amethyst-400/80">Cybersecurity Researcher</span>
+        {/* Subheading */}
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: ease as any, delay: 0.8 }}
+          className="text-lg sm:text-xl text-ash-500 font-light max-w-2xl mx-auto mb-6 leading-relaxed tracking-tight">
+          Full-Stack Developer building scalable web solutions,<br className="hidden sm:block" />
+          intelligent systems, and privacy-first security tools.
         </motion.p>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: ease as any, delay: 0.9 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button onClick={() => scroll('#skills')} id="hero-cta-enter"
-            className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-venom-600 to-venom-500 text-abyss-950 font-display font-semibold text-base hover:shadow-glow-venom-lg transition-all duration-500 hover:scale-105 apple-ease overflow-hidden">
-            <span className="relative z-10">Enter the System ↓</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-venom-400 to-cyber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </button>
-          <a href="https://github.com/TechVenom" target="_blank" rel="noopener noreferrer" id="hero-cta-dossier"
-            className="px-8 py-4 rounded-2xl glass border border-white/10 text-white/70 font-display font-medium text-base hover:text-venom-400 hover:border-venom-500/30 transition-all duration-500 apple-ease">
-            Explore GitHub
-          </a>
+        {/* Role tags */}
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 1.0 }}
+          className="flex items-center justify-center gap-3 text-ash-600 text-sm font-light mb-14">
+          <span>Full-Stack Developer</span>
+          <span className="w-1 h-1 rounded-full bg-ash-700" />
+          <span>AI Engineer</span>
+          <span className="w-1 h-1 rounded-full bg-ash-700" />
+          <span>Security Researcher</span>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="text-white/20 font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-          <div className="w-[1px] h-10 bg-gradient-to-b from-venom-500/50 to-transparent animate-pulse" />
+        {/* CTAs */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: ease as any, delay: 1.2 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onClick={() => scroll('#projects')} id="hero-cta-work"
+            className="px-8 py-3.5 rounded-lg bg-white text-noir-950 font-semibold text-[14px] hover:bg-ash-300 transition-colors duration-300">
+            View My Work
+          </button>
+          <button onClick={() => scroll('#contact')} id="hero-cta-contact"
+            className="px-8 py-3.5 rounded-lg border border-white/15 text-ash-400 font-medium text-[14px] hover:text-white hover:border-white/30 transition-all duration-300">
+            Get in Touch
+          </button>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+          <ArrowDown size={16} className="text-ash-700 animate-bounce" />
         </motion.div>
       </div>
     </section>

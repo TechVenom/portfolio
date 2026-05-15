@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════
-   BASE LAYER — Deep Space Foundation
+   BASE LAYER — Noir Foundation
    ═══════════════════════════════════════════════════════════ */
 @layer base {
   * {
@@ -18,131 +18,74 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
     scrollbar-width: thin;
-    scrollbar-color: rgba(34, 197, 94, 0.3) transparent;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
   }
 
   body {
-    @apply bg-abyss-950 text-white font-sans antialiased;
+    @apply bg-noir-950 text-ash-100 font-sans antialiased;
     overflow-x: hidden;
     line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(34, 197, 94, 0.3);
-    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(34, 197, 94, 0.5);
+    background: rgba(255, 255, 255, 0.25);
   }
 
   /* Selection colors */
   ::selection {
-    background: rgba(34, 197, 94, 0.25);
+    background: rgba(255, 255, 255, 0.15);
     color: #fff;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', system-ui, sans-serif;
-    letter-spacing: -0.02em;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.03em;
+    font-weight: 700;
   }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   COMPONENT LAYER — Glassmorphism & Effects
+   COMPONENT LAYER — Noir Design System
    ═══════════════════════════════════════════════════════════ */
 @layer components {
-  /* Glass Card */
-  .glass {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+  /* Glass Card — Noir variant */
+  .glass-noir {
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .glass-noir:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12);
   }
 
-  .glass-venom {
-    background: rgba(34, 197, 94, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(34, 197, 94, 0.15);
+  .glass-noir-strong {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .glass-cyber {
-    background: rgba(6, 182, 212, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(6, 182, 212, 0.15);
+  /* Card hover lift */
+  .card-lift {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .glass-amethyst {
-    background: rgba(124, 58, 237, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(124, 58, 237, 0.15);
-  }
-
-  /* Glow Text Gradients */
-  .text-glow-venom {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(135deg, #22c55e, #3bd47e, #06b6d4);
-  }
-
-  .text-glow-cyber {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(135deg, #06b6d4, #22d3ee, #7c3aed);
-  }
-
-  .text-glow-amethyst {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(135deg, #7c3aed, #a78bfa, #22c55e);
-  }
-
-  .text-glow-sovereign {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(135deg, #22c55e, #06b6d4, #7c3aed);
-  }
-
-  /* Hover Glow Card */
-  .card-glow {
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .card-glow::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, transparent, rgba(34, 197, 94, 0.15), transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .card-glow:hover::before {
-    opacity: 1;
-  }
-
-  .card-glow:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 20px 60px -15px rgba(34, 197, 94, 0.15);
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
   }
 
   /* Grain Overlay */
@@ -154,65 +97,42 @@
     height: 200%;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.035;
+    opacity: 0.02;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     animation: grain 0.5s steps(1) infinite;
   }
 
-  /* Section styling */
+  /* Section container */
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12;
   }
 
-  .section-title {
-    @apply font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight;
+  /* Section label (small caps) */
+  .section-label {
+    @apply text-[11px] font-mono uppercase tracking-[0.25em] text-ash-600;
+    letter-spacing: 0.25em;
   }
 
-  .section-subtitle {
-    @apply font-mono text-sm uppercase tracking-[0.3em] text-venom-500;
+  /* Section heading */
+  .section-heading {
+    @apply text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-ash-100;
+    line-height: 1.1;
   }
 
-  /* Terminal Input Style */
-  .terminal-input {
-    @apply bg-transparent border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm
-    placeholder:text-white/20 focus:outline-none focus:border-venom-500/50 focus:ring-1 focus:ring-venom-500/20
+  /* Noir input */
+  .input-noir {
+    @apply w-full bg-transparent border border-ash-800/60 rounded-xl px-5 py-4 text-ash-100 text-sm
+    placeholder:text-ash-700 focus:outline-none focus:border-ash-500 
     transition-all duration-300;
   }
 
-  .terminal-input:focus {
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+  .input-noir:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
   }
 
-  /* Shimmer border effect */
-  .shimmer-border {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .shimmer-border::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #22c55e, #06b6d4, transparent);
-    animation: shimmer 3s linear infinite;
-  }
-
-  /* Pulse dot */
-  .pulse-dot {
-    position: relative;
-  }
-
-  .pulse-dot::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    background: inherit;
-    opacity: 0;
-    animation: pulseGlow 2s ease-in-out infinite;
+  /* Divider */
+  .divider-noir {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-ash-800/40 to-transparent;
   }
 
   /* Scrollbar hide utility */
@@ -238,8 +158,8 @@
    UTILITIES LAYER
    ═══════════════════════════════════════════════════════════ */
 @layer utilities {
-  .apple-ease {
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  .ease-noir {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .text-balance {

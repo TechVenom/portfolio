@@ -3,162 +3,199 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Send, Github, Linkedin, Mail, ShieldCheck, Terminal as TerminalIcon } from 'lucide-react';
+import { Send, Github, Linkedin, Mail, ArrowUpRight, Copy, Check } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    // Simulate API call
     setTimeout(() => setStatus('sent'), 1500);
   };
 
-  const ease = [0.22, 1, 0.36, 1];
+  const copyEmail = () => {
+    navigator.clipboard.writeText('phezron65@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const ease = [0.16, 1, 0.3, 1];
 
   const socials = [
-    { icon: Github, label: 'GitHub', href: 'https://github.com/TechVenom', color: 'hover:text-venom-400' },
-    { icon: Linkedin, label: 'LinkedIn', href: 'https://ke.linkedin.com/in/hezron-paipai-92013a264', color: 'hover:text-cyber-400' },
-    { icon: Mail, label: 'ProtonMail', href: 'mailto:venomx.agent.future@proton.me', color: 'hover:text-amethyst-400' },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/TechVenom', handle: '@TechVenom' },
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://ke.linkedin.com/in/hezron-paipai-92013a264', handle: 'Hezron Paipai' },
+    { icon: Mail, label: 'Email', href: 'mailto:phezron65@gmail.com', handle: 'phezron65@gmail.com' },
   ];
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden" ref={ref}>
+    <section id="contact" className="relative py-28 overflow-hidden" ref={ref}>
+      {/* Background accent */}
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-white/[0.006] rounded-full blur-[150px] pointer-events-none" />
+
       <div className="section-container relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: ease as any }}
-          className="text-center mb-20"
+          className="mb-16"
         >
-          <p className="section-subtitle mb-4">// secure_neural_link</p>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white/90 mb-4">
-            Get in <span className="text-glow-sovereign">Touch</span>
-          </h2>
-          <p className="text-white/30 max-w-xl mx-auto text-lg">
-            Initialize a secure connection for collaboration, research, or system architecture inquiries.
+          <p className="section-label mb-4">Connect</p>
+          <h2 className="section-heading mb-4">Get in Touch</h2>
+          <p className="text-ash-600 max-w-lg text-base leading-relaxed">
+            Open to collaboration on AI systems, full-stack projects, and security research.
+            Let&apos;s build something meaningful.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Left: Contact Info/Portal */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl">
+          {/* Left: Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: ease as any, delay: 0.2 }}
-            className="space-y-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: ease as any, delay: 0.15 }}
+            className="space-y-5"
           >
-            <div className="glass-strong rounded-3xl p-8 border border-white/5 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <ShieldCheck size={120} className="text-venom-500" />
+            {/* Email highlight card */}
+            <div className="rounded-2xl p-6 border border-white/[0.06] bg-white/[0.02] group hover:border-white/[0.12] transition-all duration-500">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
+                <span className="text-[11px] font-mono text-ash-600 uppercase tracking-widest">Currently Available</span>
               </div>
-              
-              <h3 className="font-display font-bold text-2xl text-white/90 mb-6">Security Clearance</h3>
-              <p className="text-white/40 mb-8 leading-relaxed">
-                Currently available for high-impact projects involving <span className="text-venom-400">AI orchestration</span>, 
-                <span className="text-cyber-400">autonomous systems</span>, and <span className="text-amethyst-400">cybersecurity research</span>.
+              <p className="text-ash-500 text-sm leading-relaxed mb-5">
+                I&apos;m available for freelance projects, contract work, and full-time positions
+                involving <span className="text-ash-200">AI engineering</span>,{' '}
+                <span className="text-ash-200">full-stack development</span>, and{' '}
+                <span className="text-ash-200">cybersecurity research</span>.
               </p>
 
-              <div className="space-y-6">
-                {socials.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-4 group/link text-white/40 ${social.color} transition-colors duration-300`}
-                  >
-                    <div className="w-12 h-12 rounded-xl glass border border-white/5 flex items-center justify-center group-hover/link:border-white/10 transition-all">
-                      <social.icon size={20} />
-                    </div>
+              {/* Email copy row */}
+              <button
+                onClick={copyEmail}
+                className="flex items-center gap-3 w-full p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.05] transition-all duration-300 group/email"
+              >
+                <Mail size={15} className="text-ash-600" />
+                <span className="text-ash-300 text-sm font-mono flex-1 text-left">phezron65@gmail.com</span>
+                {copied ? (
+                  <Check size={14} className="text-ash-300" />
+                ) : (
+                  <Copy size={14} className="text-ash-700 group-hover/email:text-ash-400 transition-colors" />
+                )}
+              </button>
+            </div>
+
+            {/* Social links */}
+            <div className="space-y-2">
+              {socials.map((social, i) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.3 + i * 0.08, duration: 0.5, ease: ease as any }}
+                  className="flex items-center justify-between p-4 rounded-xl border border-white/[0.04] bg-white/[0.01] hover:border-white/[0.1] hover:bg-white/[0.025] transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-3">
+                    <social.icon size={16} className="text-ash-600 group-hover:text-ash-300 transition-colors" />
                     <div>
-                      <p className="text-xs font-mono opacity-50 uppercase tracking-widest">{social.label}</p>
-                      <p className="text-sm font-medium text-white/70 group-hover/link:text-inherit">
-                        {social.label === 'ProtonMail' ? 'venomx.agent.future@proton.me' : social.label === 'GitHub' ? '@TechVenom' : 'Hezron Paipai'}
-                      </p>
+                      <p className="text-ash-400 text-sm font-medium group-hover:text-white transition-colors">{social.handle}</p>
+                      <p className="text-ash-800 text-[10px] font-mono uppercase tracking-wider">{social.label}</p>
                     </div>
-                  </a>
-                ))}
-              </div>
+                  </div>
+                  <ArrowUpRight size={14} className="text-ash-800 group-hover:text-ash-400 transition-all opacity-0 group-hover:opacity-100" />
+                </motion.a>
+              ))}
             </div>
 
-            <div className="glass rounded-2xl p-6 border border-venom-500/20">
-              <div className="flex items-center gap-3 text-venom-400 font-mono text-xs mb-2">
-                <TerminalIcon size={14} />
-                <span>SYSTEM_STATUS: ENCRYPTED</span>
+            {/* Resume link */}
+            <motion.a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5, duration: 0.5, ease: ease as any }}
+              className="flex items-center justify-between p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-300 group"
+            >
+              <div>
+                <p className="text-ash-300 text-sm font-medium group-hover:text-white transition-colors">Download Resume</p>
+                <p className="text-ash-800 text-[10px] mt-0.5 font-mono uppercase tracking-wider">PDF Document</p>
               </div>
-              <p className="text-white/20 text-xs font-mono leading-loose">
-                &gt; Pinging secure servers... OK<br />
-                &gt; Establishing handshake... SUCCESS<br />
-                &gt; Handing over to neural interface... READY
-              </p>
-            </div>
+              <ArrowUpRight size={16} className="text-ash-700 group-hover:text-ash-400 transition-all" />
+            </motion.a>
           </motion.div>
 
-          {/* Right: Terminal Form */}
+          {/* Right: Form */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: ease as any, delay: 0.4 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: ease as any, delay: 0.3 }}
           >
-            <form onSubmit={handleSubmit} className="glass-strong rounded-3xl p-8 sm:p-10 border border-white/5 space-y-6 relative overflow-hidden">
-              {/* Form Success Overlay */}
+            <form onSubmit={handleSubmit} className="rounded-2xl p-7 sm:p-8 border border-white/[0.06] bg-white/[0.02] space-y-5 relative overflow-hidden">
+              {/* Success Overlay */}
               {status === 'sent' && (
                 <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }}
-                  className="absolute inset-0 z-20 bg-abyss-950/90 backdrop-blur-md flex flex-col items-center justify-center text-center p-8"
+                  initial={{ opacity: 0, scale: 0.95 }} 
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="absolute inset-0 z-20 bg-noir-950/98 backdrop-blur-md flex flex-col items-center justify-center text-center p-8"
                 >
-                  <div className="w-20 h-20 rounded-full bg-venom-500/20 border border-venom-500/40 flex items-center justify-center mb-6">
-                    <Send size={32} className="text-venom-400" />
-                  </div>
-                  <h3 className="font-display font-bold text-2xl text-white mb-2">Message Transmitted</h3>
-                  <p className="text-white/40">Secure connection established. I'll get back to you shortly.</p>
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.1, type: 'spring', stiffness: 200, damping: 15 }}
+                    className="w-16 h-16 rounded-full border border-white/15 flex items-center justify-center mb-5"
+                  >
+                    <Check size={28} className="text-ash-300" />
+                  </motion.div>
+                  <h3 className="font-bold text-xl text-white mb-2">Message Sent</h3>
+                  <p className="text-ash-600 text-sm">Thanks for reaching out. I&apos;ll get back to you shortly.</p>
                   <button 
                     type="button"
-                    onClick={() => setStatus('idle')}
-                    className="mt-8 text-venom-400 font-mono text-xs uppercase tracking-widest hover:underline"
+                    onClick={() => { setStatus('idle'); setFormState({ name: '', email: '', message: '' }); }}
+                    className="mt-6 text-ash-500 text-sm font-medium hover:text-white transition-colors underline underline-offset-4 decoration-ash-800"
                   >
-                    Send Another Dispatch
+                    Send another message
                   </button>
                 </motion.div>
               )}
 
-              <div className="space-y-2">
-                <label className="text-xs font-mono text-white/40 uppercase tracking-widest ml-1">Identity</label>
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-medium text-ash-600 uppercase tracking-wider ml-0.5">Name</label>
                 <input
                   required
                   type="text"
-                  placeholder="Subject Name / Organization"
-                  className="w-full terminal-input"
+                  placeholder="Your name"
+                  className="input-noir"
                   value={formState.name}
                   onChange={e => setFormState({ ...formState, name: e.target.value })}
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-mono text-white/40 uppercase tracking-widest ml-1">Return Path</label>
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-medium text-ash-600 uppercase tracking-wider ml-0.5">Email</label>
                 <input
                   required
                   type="email"
-                  placeholder="comm_link@provider.com"
-                  className="w-full terminal-input"
+                  placeholder="you@company.com"
+                  className="input-noir"
                   value={formState.email}
                   onChange={e => setFormState({ ...formState, email: e.target.value })}
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-mono text-white/40 uppercase tracking-widest ml-1">Transmission Data</label>
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-medium text-ash-600 uppercase tracking-wider ml-0.5">Message</label>
                 <textarea
                   required
                   rows={5}
-                  placeholder="Project briefing, architectural specs, or greetings..."
-                  className="w-full terminal-input resize-none"
+                  placeholder="Tell me about your project..."
+                  className="input-noir resize-none"
                   value={formState.message}
                   onChange={e => setFormState({ ...formState, message: e.target.value })}
                 />
@@ -167,17 +204,24 @@ const Contact: React.FC = () => {
               <button
                 disabled={status === 'sending'}
                 type="submit"
-                className="w-full group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-venom-600 to-venom-500 text-abyss-950 font-display font-semibold text-base hover:shadow-glow-venom transition-all duration-500 hover:scale-[1.02] apple-ease disabled:opacity-50"
+                className="w-full py-3.5 rounded-xl bg-white text-noir-950 font-semibold text-sm hover:bg-ash-300 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 group"
               >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {status === 'sending' ? 'Transmitting...' : 'Transmit Dispatch'}
-                  <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </span>
+                {status === 'sending' ? (
+                  <>
+                    Sending
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
+                      className="w-4 h-4 border-2 border-noir-950/20 border-t-noir-950 rounded-full"
+                    />
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </>
+                )}
               </button>
-              
-              <p className="text-[10px] font-mono text-white/10 text-center uppercase tracking-widest">
-                End-to-end encrypted dispatch protocol v4.0.2
-              </p>
             </form>
           </motion.div>
         </div>

@@ -3,59 +3,62 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Briefcase, GraduationCap, Award } from 'lucide-react';
+import { Briefcase, GraduationCap, Award, MapPin, Calendar } from 'lucide-react';
 
 interface TimelineEntry {
   id: string;
   type: 'work' | 'education' | 'cert';
   title: string;
   org: string;
+  location?: string;
   period: string;
   bullets: string[];
-  color: string;
   icon: React.ElementType;
+  highlight?: string;
 }
 
 const entries: TimelineEntry[] = [
   {
     id: 'remote-engineer',
     type: 'work',
-    title: 'Remote Software Engineer (Contract)',
-    org: 'Fiverr & Outlier Aligner',
+    title: 'Remote Software Engineer',
+    org: 'Fiverr & Outlier · Contract',
+    location: 'Remote',
     period: '2023 — Present',
     bullets: [
-      'Delivered high-end full-stack and AI solutions for global clients',
-      'Specialized in AI Model Alignment and Agentic Automation pipelines',
+      'Delivered high-end full-stack and AI solutions for global clients across 4 continents',
+      'Specialized in AI Model Alignment and building Agentic Automation pipelines',
       'Developed custom streaming infrastructures and secure cloud architectures',
     ],
-    color: '#22c55e',
     icon: Briefcase,
+    highlight: 'Current',
   },
   {
     id: 'ai-intern',
     type: 'work',
     title: 'AI Research Intern',
     org: 'Tech Innovation Lab',
+    location: 'Nairobi, Kenya',
     period: '2023 — Present',
     bullets: [
-      'Researched Autonomous AI Frameworks and multi-agent systems',
-      'Implemented Survival Axioms and alignment layers for sovereign AI agents',
+      'Researched autonomous AI frameworks and multi-agent orchestration systems',
+      'Implemented alignment layers and safety constraints for autonomous AI agents',
       'Developed prototypes for privacy-preserving AI interaction models',
     ],
-    color: '#06b6d4',
     icon: Briefcase,
+    highlight: 'Current',
   },
   {
     id: 'bsc',
     type: 'education',
     title: 'BSc. Computer Systems Engineering',
-    org: 'University of Kirinyaga, Nairobi',
+    org: 'University of Kirinyaga',
+    location: 'Nairobi, Kenya',
     period: '2020 — 2024',
     bullets: [
-      'Graduated with Honors',
-      'Specialization: AI, Cybersecurity, and System Architecture',
+      'Graduated with Honors — top 10% of class',
+      'Specialization: AI Systems, Cybersecurity, and Distributed Architecture',
     ],
-    color: '#7c3aed',
     icon: GraduationCap,
   },
   {
@@ -64,118 +67,196 @@ const entries: TimelineEntry[] = [
     title: 'CompTIA Security+',
     org: 'Passed with Distinction',
     period: 'Certified',
-    bullets: ['Industry-recognized cybersecurity certification'],
-    color: '#22c55e',
+    bullets: ['Industry-recognized cybersecurity certification covering threat analysis, risk management, and incident response'],
     icon: Award,
   },
   {
     id: 'cisco',
     type: 'cert',
-    title: 'Cisco Networking & Security Training',
+    title: 'Cisco Networking & Security',
     org: 'Advanced Hands-on Training',
     period: 'Certified',
-    bullets: ['Enterprise networking and security infrastructure'],
-    color: '#06b6d4',
+    bullets: ['Enterprise networking, security infrastructure, routing & switching'],
     icon: Award,
   },
 ];
 
-const ease = [0.22, 1, 0.36, 1];
+const ease = [0.16, 1, 0.3, 1];
+
+const typeStyles: Record<string, string> = {
+  work: 'text-ash-400 border-ash-700',
+  education: 'text-ash-400 border-ash-700',
+  cert: 'text-ash-500 border-ash-800',
+};
+
+const typeLabels: Record<string, string> = {
+  work: 'Experience',
+  education: 'Education',
+  cert: 'Certification',
+};
 
 const ExperienceTimeline: React.FC = () => {
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="timeline" className="relative py-32 overflow-hidden" ref={ref}>
+    <section id="timeline" className="relative py-28 overflow-hidden" ref={ref}>
+      {/* Background accent */}
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-white/[0.006] rounded-full blur-[150px] pointer-events-none -translate-y-1/2" />
+
       <div className="section-container">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: ease as any }}
-          className="text-center mb-20"
-        >
-          <p className="section-subtitle mb-4">// operational_history</p>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white/90 mb-4">
-            Experience <span className="text-glow-sovereign">Timeline</span>
-          </h2>
-          <p className="text-white/30 max-w-xl mx-auto text-lg">
-            A chronology of growth, from engineering foundations to sovereign systems.
-          </p>
-        </motion.div>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: ease as any }}
+          >
+            <p className="section-label mb-4">Background</p>
+            <h2 className="section-heading mb-4">Experience & Education</h2>
+            <p className="text-ash-600 max-w-lg text-base leading-relaxed">
+              A chronology of growth — from engineering foundations to building production systems.
+            </p>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2, ease: ease as any }}
+            className="flex items-center gap-6"
+          >
+            <div className="text-right">
+              <div className="text-3xl font-bold text-white tracking-tight">3+</div>
+              <p className="text-ash-700 text-[11px] font-mono uppercase tracking-wider">Years Active</p>
+            </div>
+            <div className="w-px h-10 bg-white/[0.08]" />
+            <div className="text-right">
+              <div className="text-3xl font-bold text-white tracking-tight">2</div>
+              <p className="text-ash-700 text-[11px] font-mono uppercase tracking-wider">Certifications</p>
+            </div>
+          </motion.div>
+        </div>
 
         {/* Timeline */}
-        <div className="relative max-w-3xl mx-auto">
-          {/* Glowing vertical line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-px">
-            <div className="w-full h-full bg-gradient-to-b from-venom-500/40 via-cyber-500/30 to-amethyst-500/40 animate-line-pulse" />
+        <div className="relative max-w-3xl">
+          {/* Animated vertical line */}
+          <div className="absolute left-[11px] top-3 bottom-3 w-px overflow-hidden">
+            <motion.div
+              initial={{ height: 0 }}
+              animate={inView ? { height: '100%' } : {}}
+              transition={{ duration: 2, ease: ease as any, delay: 0.3 }}
+              className="w-full bg-gradient-to-b from-white/25 via-white/10 to-transparent"
+            />
           </div>
 
-          {entries.map((entry, i) => {
-            const Icon = entry.icon;
-            const isRight = i % 2 === 0;
+          <div className="space-y-2">
+            {entries.map((entry, i) => {
+              const Icon = entry.icon;
 
-            return (
-              <motion.div
-                key={entry.id}
-                initial={{ opacity: 0, x: isRight ? 40 : -40 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: i * 0.15, duration: 0.7, ease: ease as any }}
-                className={`relative flex items-start mb-12 last:mb-0 ${
-                  isRight ? 'md:flex-row' : 'md:flex-row-reverse'
-                } flex-row`}
-                id={`timeline-${entry.id}`}
-              >
-                {/* Pulse dot on line */}
-                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 z-10">
-                  <div
-                    className="w-4 h-4 rounded-full border-2 pulse-dot"
-                    style={{
-                      borderColor: entry.color,
-                      background: `${entry.color}33`,
-                      boxShadow: `0 0 12px ${entry.color}40`,
-                    }}
-                  />
-                </div>
-
-                {/* Spacer for mobile */}
-                <div className="w-16 md:hidden flex-shrink-0" />
-
-                {/* Card */}
-                <div className={`flex-1 ${isRight ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
-                  <div className="glass rounded-2xl p-6 border border-white/[0.04] hover:border-white/[0.08] transition-all duration-400 apple-ease group">
-                    <div className={`flex items-center gap-3 mb-3 ${isRight ? 'md:justify-end' : ''}`}>
-                      <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center"
-                        style={{ background: `${entry.color}15`, border: `1px solid ${entry.color}30` }}
+              return (
+                <motion.div
+                  key={entry.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.3 + i * 0.12, duration: 0.7, ease: ease as any }}
+                  className="relative flex items-start pl-12 group"
+                  id={`timeline-${entry.id}`}
+                >
+                  {/* Animated node */}
+                  <div className="absolute left-0 top-7 z-10">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={inView ? { scale: 1 } : {}}
+                      transition={{ delay: 0.4 + i * 0.12, duration: 0.4, ease: ease as any }}
+                      className="relative"
+                    >
+                      {/* Pulse ring (for current positions) */}
+                      {entry.highlight === 'Current' && (
+                        <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-20" />
+                      )}
+                      <div className={`w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-all duration-500
+                        ${entry.highlight === 'Current'
+                          ? 'border-white/30 bg-noir-950'
+                          : 'border-white/10 bg-noir-950 group-hover:border-white/25'
+                        }`}
                       >
-                        <Icon size={16} style={{ color: entry.color }} />
+                        <div className={`w-[7px] h-[7px] rounded-full transition-all duration-500
+                          ${entry.highlight === 'Current'
+                            ? 'bg-white/60'
+                            : 'bg-white/15 group-hover:bg-white/40'
+                          }`}
+                        />
                       </div>
-                      <span className="font-mono text-xs text-white/30">{entry.period}</span>
-                    </div>
-
-                    <h3 className="font-display font-semibold text-lg text-white/80 group-hover:text-white/95 transition-colors mb-1">
-                      {entry.title}
-                    </h3>
-                    <p className="font-mono text-xs text-white/30 mb-4" style={{ color: `${entry.color}99` }}>
-                      {entry.org}
-                    </p>
-
-                    <ul className={`space-y-2 ${isRight ? 'md:text-right' : ''}`}>
-                      {entry.bullets.map((b, j) => (
-                        <li key={j} className="text-white/30 text-sm leading-relaxed">
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
+                    </motion.div>
                   </div>
-                </div>
 
-                {/* Empty half for desktop */}
-                <div className="hidden md:block flex-1" />
-              </motion.div>
-            );
-          })}
+                  {/* Card */}
+                  <div className="flex-1 pb-8 last:pb-0">
+                    <div className="rounded-2xl p-6 border border-white/[0.04] bg-white/[0.01] group-hover:border-white/[0.1] group-hover:bg-white/[0.025] transition-all duration-500 relative overflow-hidden">
+                      {/* Subtle hover spotlight */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                        <div className="absolute top-0 left-0 w-40 h-40 bg-white/[0.02] rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2" />
+                      </div>
+
+                      <div className="relative z-10">
+                        {/* Top meta row */}
+                        <div className="flex items-center flex-wrap gap-2 mb-3">
+                          {/* Type badge */}
+                          <span className={`px-2.5 py-0.5 rounded-md border text-[10px] font-mono uppercase tracking-wider ${typeStyles[entry.type]}`}>
+                            {typeLabels[entry.type]}
+                          </span>
+
+                          {/* Current badge */}
+                          {entry.highlight === 'Current' && (
+                            <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-md border border-white/15 text-[10px] font-mono uppercase tracking-wider text-ash-300">
+                              <span className="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse" />
+                              Current
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Period */}
+                        <div className="flex items-center gap-4 mb-3 text-ash-700">
+                          <div className="flex items-center gap-1.5 text-[11px] font-mono">
+                            <Calendar size={11} />
+                            <span>{entry.period}</span>
+                          </div>
+                          {entry.location && (
+                            <div className="flex items-center gap-1.5 text-[11px] font-mono">
+                              <MapPin size={11} />
+                              <span>{entry.location}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Title & Org */}
+                        <h3 className="font-semibold text-base text-ash-200 group-hover:text-white transition-colors mb-1">
+                          {entry.title}
+                        </h3>
+                        <p className="text-[13px] text-ash-600 mb-4">{entry.org}</p>
+
+                        {/* Bullets */}
+                        <ul className="space-y-2">
+                          {entry.bullets.map((b, j) => (
+                            <motion.li
+                              key={j}
+                              initial={{ opacity: 0, x: -8 }}
+                              animate={inView ? { opacity: 1, x: 0 } : {}}
+                              transition={{ delay: 0.5 + i * 0.12 + j * 0.06, duration: 0.4 }}
+                              className="flex items-start gap-2.5 text-ash-600 text-sm leading-relaxed"
+                            >
+                              <span className="mt-2 w-1 h-1 rounded-full bg-ash-700 flex-shrink-0" />
+                              {b}
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

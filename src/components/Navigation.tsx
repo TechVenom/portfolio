@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Genesis', href: '#hero' },
-  { label: 'Loadout', href: '#skills' },
+  { label: 'Home', href: '#hero' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
-  { label: 'History', href: '#timeline' },
+  { label: 'Experience', href: '#timeline' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -35,14 +35,14 @@ const Navigation: React.FC = () => {
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 apple-ease ${
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-noir ${
           isScrolled
-            ? 'bg-abyss-950/80 backdrop-blur-xl border-b border-white/[0.06]'
+            ? 'bg-noir-950/90 backdrop-blur-xl border-b border-white/[0.04]'
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <button
@@ -50,28 +50,25 @@ const Navigation: React.FC = () => {
               className="flex items-center gap-3 group"
               id="nav-logo"
             >
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-venom-500 to-cyber-500 flex items-center justify-center overflow-hidden group-hover:shadow-glow-venom transition-shadow duration-500">
-                <span className="text-abyss-950 font-display font-bold text-lg">H</span>
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative w-9 h-9 rounded-lg border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors duration-300">
+                <span className="text-white font-bold text-sm tracking-tight">HP</span>
               </div>
               <div className="hidden sm:block">
-                <span className="text-white font-display font-semibold text-lg tracking-tight">Hezron</span>
-                <span className="text-venom-500 font-display font-light text-lg ml-1">Paipai</span>
+                <span className="text-white font-semibold text-[15px] tracking-tight">Hezron</span>
+                <span className="text-ash-500 font-light text-[15px] ml-1.5">Paipai</span>
               </div>
             </button>
 
             {/* Desktop Links */}
             <div className="hidden md:flex items-center gap-1">
-              {navLinks.map((link, i) => (
+              {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="relative px-5 py-2 text-sm font-mono tracking-wider text-white/50 hover:text-venom-400 transition-colors duration-300 group"
+                  className="relative px-4 py-2 text-[13px] font-medium tracking-wide text-ash-600 hover:text-ash-100 transition-colors duration-300"
                   id={`nav-${link.label.toLowerCase()}`}
                 >
-                  <span className="relative z-10">{link.label}</span>
-                  <div className="absolute inset-0 rounded-lg bg-venom-500/0 group-hover:bg-venom-500/[0.06] transition-colors duration-300" />
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-venom-500 to-cyber-500 group-hover:w-3/4 transition-all duration-500 apple-ease" />
+                  {link.label}
                 </button>
               ))}
             </div>
@@ -79,21 +76,21 @@ const Navigation: React.FC = () => {
             {/* CTA + Mobile */}
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com/TechVenom"
+                href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-venom-600 to-venom-500 text-abyss-950 font-semibold text-sm hover:shadow-glow-venom transition-all duration-500 hover:scale-105 apple-ease"
-                id="nav-download-dossier"
+                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/20 text-white text-[13px] font-medium hover:bg-white hover:text-noir-950 transition-all duration-300"
+                id="nav-resume"
               >
-                Explore GitHub
+                Resume
               </a>
 
               <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
-                className="md:hidden p-2 text-white/60 hover:text-venom-400 transition-colors"
+                className="md:hidden p-2 text-ash-500 hover:text-white transition-colors"
                 id="nav-mobile-toggle"
               >
-                {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
           </div>
@@ -104,21 +101,21 @@ const Navigation: React.FC = () => {
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-abyss-950/95 backdrop-blur-2xl pt-24"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-noir-950/98 backdrop-blur-2xl pt-24"
           >
-            <div className="flex flex-col items-center gap-6 p-8">
+            <div className="flex flex-col items-center gap-2 p-8">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                   onClick={() => scrollTo(link.href)}
-                  className="text-2xl font-display font-semibold text-white/70 hover:text-venom-400 transition-colors duration-300"
+                  className="text-xl font-medium text-ash-500 hover:text-white transition-colors duration-300 py-3"
                 >
                   {link.label}
                 </motion.button>
@@ -126,13 +123,13 @@ const Navigation: React.FC = () => {
               <motion.a
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                href="https://github.com/TechVenom"
+                transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 px-8 py-3 rounded-xl bg-gradient-to-r from-venom-600 to-venom-500 text-abyss-950 font-semibold text-lg"
+                className="mt-6 px-8 py-3 rounded-lg border border-white/20 text-white font-medium text-base hover:bg-white hover:text-noir-950 transition-all duration-300"
               >
-                Explore GitHub
+                Resume
               </motion.a>
             </div>
           </motion.div>
