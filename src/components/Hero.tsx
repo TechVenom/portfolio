@@ -102,7 +102,7 @@ const Hero: React.FC = () => {
         {/* Status badge */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.4 }} className="relative mb-10 inline-block">
           {/* Background Logo Backdrop */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 opacity-[0.04] blur-[2px] pointer-events-none select-none z-0">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 opacity-15 pointer-events-none select-none z-0">
             <img src="/favicon.png" alt="VenomX" className="w-full h-full object-contain grayscale invert" />
           </div>
           
