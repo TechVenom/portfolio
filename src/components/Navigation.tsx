@@ -127,53 +127,56 @@ const Navigation: React.FC = () => {
               </button>
             </div>
 
-            <div className="flex-1 flex flex-col justify-center px-12 relative overflow-hidden">
-              {/* Background Branding (Subtle) */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] opacity-[0.02] pointer-events-none select-none -rotate-12">
+            <div className="flex-1 flex flex-col justify-start pt-12 px-8 relative overflow-hidden">
+              {/* Background Branding (Ultra Subtle) */}
+              <div className="absolute bottom-10 right-0 w-[80%] opacity-[0.02] pointer-events-none select-none">
                 <img src="/favicon.png" alt="" className="w-full h-full object-contain grayscale invert" />
               </div>
 
-              <div className="relative z-10 space-y-2">
+              <div className="relative z-10 space-y-1">
                 {navLinks.map((link, i) => (
                   <motion.button
                     key={link.href}
-                    initial={{ opacity: 0, x: 40 }}
+                    initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.07, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ delay: 0.1 + i * 0.05, duration: 0.5 }}
                     onClick={() => scrollTo(link.href)}
-                    className="group flex items-baseline gap-6 w-full text-left py-4"
+                    className="group flex items-center justify-between w-full px-6 py-4 rounded-xl border border-transparent hover:border-white/10 hover:bg-white/[0.03] transition-all duration-300"
                   >
-                    <span className="text-ash-800 font-mono text-xs group-hover:text-white transition-colors duration-300">0{i + 1}</span>
-                    <span className="text-4xl sm:text-5xl font-bold tracking-tighter text-ash-200 group-hover:text-white group-hover:translate-x-2 transition-all duration-500 italic uppercase">
-                      {link.label}
-                    </span>
+                    <div className="flex items-center gap-5">
+                      <span className="text-ash-800 font-mono text-[10px] tracking-widest uppercase">0{i + 1}</span>
+                      <span className="text-lg font-semibold tracking-tight text-ash-300 group-hover:text-white transition-colors duration-300 uppercase">
+                        {link.label}
+                      </span>
+                    </div>
+                    <div className="w-6 h-px bg-white/0 group-hover:bg-white/20 transition-all duration-500" />
                   </motion.button>
                 ))}
               </div>
             </div>
 
             {/* Footer Area */}
-            <div className="p-12 border-t border-white/[0.05] bg-noir-900/50">
-              <div className="flex flex-col gap-8">
+            <div className="p-8 border-t border-white/[0.05]">
+              <div className="flex flex-col gap-6">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.4 }}
                 >
                   <a
                     href="/resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-noir-950 font-bold text-sm hover:bg-ash-300 transition-all duration-300"
+                    className="flex items-center justify-center gap-3 w-full py-4 rounded-xl border border-white/20 text-white font-bold text-sm hover:bg-white hover:text-noir-950 transition-all duration-500"
                   >
-                    Download Resume
+                    Resume
                   </a>
                 </motion.div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                  <div className="flex items-center gap-8">
-                    <a href="https://github.com/TechVenom" target="_blank" rel="noopener noreferrer" className="text-ash-600 hover:text-white transition-colors text-[10px] font-mono tracking-[0.2em] uppercase">GitHub</a>
-                    <a href="https://linkedin.com/in/hezron-paipai" target="_blank" rel="noopener noreferrer" className="text-ash-600 hover:text-white transition-colors text-[10px] font-mono tracking-[0.2em] uppercase">LinkedIn</a>
+                <div className="flex items-center justify-between px-2">
+                  <div className="flex items-center gap-6">
+                    <a href="https://github.com/TechVenom" target="_blank" rel="noopener noreferrer" className="text-ash-700 hover:text-white transition-colors text-[10px] font-mono tracking-[0.2em] uppercase">GH</a>
+                    <a href="https://linkedin.com/in/hezron-paipai" target="_blank" rel="noopener noreferrer" className="text-ash-700 hover:text-white transition-colors text-[10px] font-mono tracking-[0.2em] uppercase">LI</a>
                   </div>
                   <p className="text-[9px] text-ash-800 font-mono tracking-[0.3em] uppercase">VenomX © 2024</p>
                 </div>
