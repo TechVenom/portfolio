@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     description: "Building scalable web solutions, intelligent systems, and privacy-first tools. View my work and get in touch.",
     type: "website",
   },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/logo192.png",
+  },
 };
 
 export default function RootLayout({
