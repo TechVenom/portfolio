@@ -22,7 +22,24 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'venomx', num: '01',
+    id: 'hezgene', num: '01',
+    title: 'HezGene',
+    subtitle: 'Codebase Intelligence for Python',
+    description: 'A static analysis tool combined with LLM runtime intelligence. Uses a deterministic AST layer to find unused code and complexity, with an optional AI layer for semantic refactoring and guaranteed-safe test generation via a 5-Ring Gauntlet.',
+    impact: 'Autonomous Code Evolution',
+    icon: Code,
+    tech: ['Python', 'AST', 'LLM', 'Static Analysis'],
+    github: 'https://github.com/TechVenom/HezGene',
+    live: 'https://hezgene.vercel.app/docs/introduction',
+    features: [
+      'Deterministic AST layer for identifying unused code and duplication',
+      'Optional LLM runtime for deep semantic refactoring',
+      '5-Ring Gauntlet for guaranteed-safe AI test generation',
+      'VS Code extension and MCP agent integration',
+    ],
+  },
+  {
+    id: 'venomx', num: '02',
     title: 'VENOMX',
     subtitle: 'Autonomous Intelligence Engine',
     description: 'A production-grade autonomous AI system with a self-healing engine, multi-agent swarm orchestration, and a 9-tier unified memory architecture. Not a chatbot wrapper — a genuine self-improving system.',
@@ -41,7 +58,7 @@ const projects: Project[] = [
     ],
   },
   {
-    id: 'paps', num: '02',
+    id: 'paps', num: '03',
     title: 'VenomX PAPS',
     subtitle: 'Android Virtual Camera System',
     description: 'System-level virtual camera injector for rooted Android devices. Intercepts Camera2 API surfaces to inject custom video feeds from OBS, local files, or streaming sources.',
@@ -57,7 +74,7 @@ const projects: Project[] = [
     ],
   },
   {
-    id: 'shadowcloak', num: '03',
+    id: 'shadowcloak', num: '04',
     title: 'ShadowCloak',
     subtitle: 'Privacy & Anonymity Toolkit',
     description: 'Comprehensive privacy toolkit for security professionals. Features real-time identity obfuscation, Tor integration, DNS protection, and automated anti-forensics.',
@@ -73,7 +90,7 @@ const projects: Project[] = [
     ],
   },
   {
-    id: 'pro-server', num: '04',
+    id: 'pro-server', num: '05',
     title: 'Streaming Server',
     subtitle: 'Low-Latency Media Hub',
     description: 'Sub-second latency streaming hub built on MediaMTX. Supports RTMP, SRT, HLS, and WebRTC with zero-config Docker deployment.',
@@ -89,7 +106,7 @@ const projects: Project[] = [
     ],
   },
   {
-    id: 'skills-library', num: '05',
+    id: 'skills-library', num: '06',
     title: 'Agent Skills Library',
     subtitle: '49+ Autonomous Agent Skills',
     description: 'A production-grade library of modular skills for autonomous agents — including crypto intelligence, red teaming, web scraping, and OS management.',
@@ -105,7 +122,7 @@ const projects: Project[] = [
     ],
   },
   {
-    id: 'claws', num: '06',
+    id: 'claws', num: '07',
     title: 'VENOMX-CLAWS',
     subtitle: 'Security Testing Framework',
     description: 'Automated vulnerability assessment and penetration testing tool integrated into the VenomX ecosystem for continuous security operations.',
@@ -161,25 +178,25 @@ function ProjectCard({ project, index, inView, onSelect }: { project: Project; i
       id={`project-card-${project.id}`}
     >
       {/* Animated border glow on hover */}
-      <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/[0.08] group-hover:via-white/[0.03] group-hover:to-white/[0.08] transition-all duration-700 pointer-events-none" />
+      <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-black/0 via-black/0 to-black/0 group-hover:from-black/[0.08] group-hover:via-black/[0.03] group-hover:to-black/[0.08] transition-all duration-700 pointer-events-none" />
 
-      <div className="relative rounded-2xl p-7 bg-white/[0.015] border border-white/[0.06] group-hover:border-white/[0.12] group-hover:bg-white/[0.03] transition-all duration-500 overflow-hidden h-full">
+      <div className="relative rounded-2xl p-7 bg-black/[0.015] border border-black/[0.06] group-hover:border-black/[0.12] group-hover:bg-black/[0.03] transition-all duration-500 overflow-hidden h-full">
         {/* Spotlight gradient on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-          <div className="absolute -top-20 -right-20 w-60 h-60 bg-white/[0.04] rounded-full blur-[80px]" />
+          <div className="absolute -top-20 -right-20 w-60 h-60 bg-black/[0.04] rounded-full blur-[80px]" />
         </div>
 
         <div className="relative z-10 flex flex-col h-full">
           {/* Top row: number + icon */}
           <div className="flex items-start justify-between mb-6">
             <span className="text-ash-800 font-mono text-[11px] tracking-wider">{project.num}</span>
-            <div className="w-10 h-10 rounded-xl border border-white/[0.08] flex items-center justify-center group-hover:border-white/20 group-hover:bg-white/[0.04] transition-all duration-500">
+            <div className="w-10 h-10 rounded-xl border border-black/[0.08] flex items-center justify-center group-hover:border-black/20 group-hover:bg-black/[0.04] transition-all duration-500">
               <Icon size={17} className="text-ash-500 group-hover:text-ash-300 transition-colors duration-500" />
             </div>
           </div>
 
           {/* Title */}
-          <h3 className="font-bold text-xl text-ash-200 mb-1.5 group-hover:text-white transition-colors duration-300">{project.title}</h3>
+          <h3 className="font-bold text-xl text-ash-200 mb-1.5 group-hover:text-black transition-colors duration-300">{project.title}</h3>
           <p className="text-[10px] text-ash-700 mb-4 tracking-[0.15em] uppercase font-mono">{project.subtitle}</p>
 
           {/* Description */}
@@ -193,7 +210,7 @@ function ProjectCard({ project, index, inView, onSelect }: { project: Project; i
                 initial={{ opacity: 0, y: 8 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.4 + index * 0.1 + j * 0.05, duration: 0.4 }}
-                className="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.06] text-ash-600 font-mono text-[10px] group-hover:border-white/[0.1] group-hover:text-ash-500 transition-all duration-300"
+                className="px-2.5 py-1 rounded-md bg-black/[0.03] border border-black/[0.06] text-ash-600 font-mono text-[10px] group-hover:border-black/[0.1] group-hover:text-ash-500 transition-all duration-300"
               >
                 {t}
               </motion.span>
@@ -201,12 +218,12 @@ function ProjectCard({ project, index, inView, onSelect }: { project: Project; i
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between pt-5 border-t border-white/[0.04] group-hover:border-white/[0.08] transition-colors duration-300">
+          <div className="flex items-center justify-between pt-5 border-t border-black/[0.04] group-hover:border-black/[0.08] transition-colors duration-300">
             <span className="text-ash-800 font-mono text-[9px] uppercase tracking-widest group-hover:text-ash-600 transition-colors">{project.impact}</span>
             <motion.div
               initial={{ x: 0, y: 0 }}
               whileHover={{ x: 2, y: -2 }}
-              className="w-7 h-7 rounded-lg border border-white/[0.06] flex items-center justify-center group-hover:border-white/[0.15] group-hover:bg-white/[0.04] transition-all duration-300"
+              className="w-7 h-7 rounded-lg border border-black/[0.06] flex items-center justify-center group-hover:border-black/[0.15] group-hover:bg-black/[0.04] transition-all duration-300"
             >
               <ArrowUpRight size={12} className="text-ash-700 group-hover:text-ash-400 transition-colors" />
             </motion.div>
@@ -224,7 +241,7 @@ const FeaturedProjects: React.FC = () => {
   return (
     <section id="projects" className="relative py-28 overflow-hidden" ref={ref}>
       {/* Background accents */}
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-white/[0.006] rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-black/[0.006] rounded-full blur-[180px] pointer-events-none" />
 
       <div className="section-container">
         {/* Header with project count */}
@@ -248,12 +265,12 @@ const FeaturedProjects: React.FC = () => {
             className="flex items-center gap-6"
           >
             <div className="text-right">
-              <div className="text-3xl font-bold text-white tracking-tight">{projects.length + additionalProjects.length}</div>
+              <div className="text-3xl font-bold text-black tracking-tight">{projects.length + additionalProjects.length}</div>
               <p className="text-ash-700 text-[11px] font-mono uppercase tracking-wider">Total Projects</p>
             </div>
-            <div className="w-px h-10 bg-white/[0.08]" />
+            <div className="w-px h-10 bg-black/[0.08]" />
             <div className="text-right">
-              <div className="text-3xl font-bold text-white tracking-tight">6</div>
+              <div className="text-3xl font-bold text-black tracking-tight">6</div>
               <p className="text-ash-700 text-[11px] font-mono uppercase tracking-wider">Featured</p>
             </div>
           </motion.div>
@@ -281,7 +298,7 @@ const FeaturedProjects: React.FC = () => {
         >
           <div className="flex items-center gap-3 mb-6">
             <h4 className="text-ash-500 text-sm font-medium">More Projects</h4>
-            <div className="flex-1 h-px bg-white/[0.04]" />
+            <div className="flex-1 h-px bg-black/[0.04]" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {additionalProjects.map((p, i) => (
@@ -293,10 +310,10 @@ const FeaturedProjects: React.FC = () => {
                 initial={{ opacity: 0, x: -15 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: ease as any }}
-                className="flex items-center justify-between p-4 rounded-xl border border-white/[0.04] bg-white/[0.01] hover:border-white/[0.1] hover:bg-white/[0.03] transition-all duration-300 group"
+                className="flex items-center justify-between p-4 rounded-xl border border-black/[0.04] bg-black/[0.01] hover:border-black/[0.1] hover:bg-black/[0.03] transition-all duration-300 group"
               >
                 <div>
-                  <p className="text-ash-300 text-sm font-medium group-hover:text-white transition-colors">{p.name}</p>
+                  <p className="text-ash-300 text-sm font-medium group-hover:text-black transition-colors">{p.name}</p>
                   <p className="text-ash-700 text-xs mt-0.5">{p.desc}</p>
                 </div>
                 <ExternalLink size={14} className="text-ash-800 group-hover:text-ash-400 transition-colors flex-shrink-0" />
@@ -323,21 +340,21 @@ const FeaturedProjects: React.FC = () => {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.4, ease: ease as any }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-2xl rounded-2xl p-8 sm:p-10 border border-white/[0.08] bg-noir-900/95 backdrop-blur-xl max-h-[90vh] overflow-y-auto scrollbar-hide"
+              className="relative w-full max-w-2xl rounded-2xl p-8 sm:p-10 border border-black/[0.08] bg-noir-900/95 backdrop-blur-xl max-h-[90vh] overflow-y-auto scrollbar-hide"
             >
               {/* Close button */}
-              <button onClick={() => setSelected(null)} className="absolute top-5 right-5 w-8 h-8 rounded-lg border border-white/[0.06] flex items-center justify-center text-ash-700 hover:text-white hover:border-white/20 transition-all" id="modal-close">
+              <button onClick={() => setSelected(null)} className="absolute top-5 right-5 w-8 h-8 rounded-lg border border-black/[0.06] flex items-center justify-center text-ash-700 hover:text-black hover:border-black/20 transition-all" id="modal-close">
                 <X size={16} />
               </button>
 
               {/* Modal header */}
               <div className="flex items-start gap-5 mb-8">
-                <div className="w-14 h-14 rounded-2xl border border-white/[0.08] bg-white/[0.03] flex items-center justify-center flex-shrink-0">
+                <div className="w-14 h-14 rounded-2xl border border-black/[0.08] bg-black/[0.03] flex items-center justify-center flex-shrink-0">
                   <selected.icon size={24} className="text-ash-400" />
                 </div>
                 <div>
                   <span className="text-ash-700 font-mono text-[11px] tracking-wider">{selected.num}</span>
-                  <h3 className="font-bold text-2xl text-white mt-0.5">{selected.title}</h3>
+                  <h3 className="font-bold text-2xl text-black mt-0.5">{selected.title}</h3>
                   <p className="font-mono text-[11px] text-ash-600 mt-1 uppercase tracking-widest">{selected.subtitle}</p>
                 </div>
               </div>
@@ -348,7 +365,7 @@ const FeaturedProjects: React.FC = () => {
                 {/* Capabilities */}
                 <div>
                   <h4 className="font-semibold text-sm text-ash-400 mb-5 uppercase tracking-wider flex items-center gap-2">
-                    <div className="w-5 h-px bg-white/20" />
+                    <div className="w-5 h-px bg-black/20" />
                     Core Capabilities
                   </h4>
                   <ul className="space-y-3">
@@ -368,9 +385,9 @@ const FeaturedProjects: React.FC = () => {
                 </div>
 
                 {/* Tech stack */}
-                <div className="pt-6 border-t border-white/[0.04]">
+                <div className="pt-6 border-t border-black/[0.04]">
                   <h4 className="font-semibold text-xs text-ash-700 mb-4 uppercase tracking-widest flex items-center gap-2">
-                    <div className="w-5 h-px bg-white/10" />
+                    <div className="w-5 h-px bg-black/10" />
                     Technology Stack
                   </h4>
                   <div className="flex flex-wrap gap-2">
@@ -380,7 +397,7 @@ const FeaturedProjects: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2 + i * 0.05, duration: 0.3 }}
-                        className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-ash-500 font-mono text-xs hover:bg-white/[0.08] hover:text-ash-300 transition-all cursor-default"
+                        className="px-3 py-1.5 rounded-lg bg-black/[0.04] border border-black/[0.06] text-ash-500 font-mono text-xs hover:bg-black/[0.08] hover:text-ash-300 transition-all cursor-default"
                       >
                         {t}
                       </motion.span>
@@ -392,17 +409,17 @@ const FeaturedProjects: React.FC = () => {
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
                   {selected.live && (
                     <a href={selected.live} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-noir-950 font-semibold text-sm hover:bg-ash-300 transition-colors duration-300">
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-black text-noir-950 font-semibold text-sm hover:bg-ash-300 transition-colors duration-300">
                       <ExternalLink size={16} /> Visit Website
                     </a>
                   )}
                   {selected.isPrivate ? (
-                    <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-ash-600 text-sm">
+                    <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-black/[0.03] border border-black/[0.06] text-ash-600 text-sm">
                       <Shield size={14} /> Private Repository
                     </div>
                   ) : (
                     <a href={selected.github} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-ash-400 font-medium text-sm hover:text-white hover:border-white/30 transition-all duration-300">
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-black/10 text-ash-400 font-medium text-sm hover:text-black hover:border-black/30 transition-all duration-300">
                       <Github size={16} /> View Source
                     </a>
                   )}
