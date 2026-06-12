@@ -183,7 +183,7 @@ function ProjectCard({ project, index, inView, onSelect }: { project: Project; i
       <div className="relative rounded-2xl p-7 bg-black/[0.015] border border-black/[0.06] group-hover:border-black/[0.12] group-hover:bg-black/[0.03] transition-all duration-500 overflow-hidden h-full">
         {/* Spotlight gradient on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-          <div className="absolute -top-20 -right-20 w-60 h-60 bg-black/[0.04] rounded-full blur-[80px]" />
+
         </div>
 
         <div className="relative z-10 flex flex-col h-full">
@@ -241,7 +241,7 @@ const FeaturedProjects: React.FC = () => {
   return (
     <section id="projects" className="relative py-28 overflow-hidden" ref={ref}>
       {/* Background accents */}
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-black/[0.006] rounded-full blur-[180px] pointer-events-none" />
+
 
       <div className="section-container">
         {/* Header with project count */}

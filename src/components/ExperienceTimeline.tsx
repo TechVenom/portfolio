@@ -101,7 +101,7 @@ const ExperienceTimeline: React.FC = () => {
   return (
     <section id="timeline" className="relative py-28 overflow-hidden" ref={ref}>
       {/* Background accent */}
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-black/[0.006] rounded-full blur-[150px] pointer-events-none -translate-y-1/2" />
+
 
       <div className="section-container">
         {/* Header */}
@@ -195,7 +195,7 @@ const ExperienceTimeline: React.FC = () => {
                     <div className="rounded-2xl p-6 border border-black/[0.04] bg-black/[0.01] group-hover:border-black/[0.1] group-hover:bg-black/[0.025] transition-all duration-500 relative overflow-hidden">
                       {/* Subtle hover spotlight */}
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                        <div className="absolute top-0 left-0 w-40 h-40 bg-black/[0.02] rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2" />
+
                       </div>
 
                       <div className="relative z-10">

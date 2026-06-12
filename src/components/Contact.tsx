@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="relative py-28 overflow-hidden" ref={ref}>
       {/* Background accent */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-black/[0.006] rounded-full blur-[150px] pointer-events-none" />
+
 
       <div className="section-container relative z-10">
         {/* Header */}

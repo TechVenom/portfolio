@@ -154,7 +154,7 @@ const SkillMatrix: React.FC = () => {
   return (
     <section id="skills" className="relative py-28 overflow-hidden" ref={ref}>
       {/* Background accent */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/[0.008] rounded-full blur-[150px] pointer-events-none" />
+
 
       <div className="section-container">
         {/* Header row */}
@@ -177,11 +177,11 @@ const SkillMatrix: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, ease: ease as any, delay: 0.3 }}
-            className="flex items-center gap-4 px-6 py-4 rounded-2xl border border-white/[0.06] bg-white/[0.02]"
+            className="flex items-center gap-4 px-6 py-4 rounded-2xl border border-black/[0.06] bg-black/[0.02]"
           >
             <ProgressRing value={parseInt(cat.stat)} inView={inView} size={52} stroke={3} />
             <div>
-              <div className="text-3xl font-bold text-white tracking-tight">
+              <div className="text-3xl font-bold text-black tracking-tight">
                 <AnimatedNumber value={parseInt(cat.stat)} inView={inView} />
                 <span className="text-ash-600 text-lg ml-0.5">%</span>
               </div>
@@ -195,7 +195,7 @@ const SkillMatrix: React.FC = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: ease as any, delay: 0.15 }}
-          className="flex flex-wrap gap-2 mb-12 p-1.5 rounded-2xl bg-white/[0.02] border border-white/[0.04] w-fit"
+          className="flex flex-wrap gap-2 mb-12 p-1.5 rounded-2xl bg-black/[0.02] border border-black/[0.04] w-fit"
         >
           {categories.map((c) => {
             const Icon = c.icon;
@@ -214,7 +214,7 @@ const SkillMatrix: React.FC = () => {
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-white rounded-xl"
+                    className="absolute inset-0 bg-black rounded-xl"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -248,18 +248,18 @@ const SkillMatrix: React.FC = () => {
                     transition={{ delay: i * 0.08, duration: 0.5, ease: ease as any }}
                     onClick={() => setExpandedSkill(isExpanded ? null : skill.name)}
                     className={`group relative rounded-2xl p-6 cursor-pointer transition-all duration-500 overflow-hidden
-                      border ${isExpanded ? 'border-white/15 bg-white/[0.04]' : 'border-white/[0.06] bg-white/[0.015] hover:border-white/[0.12] hover:bg-white/[0.03]'}
+                      border ${isExpanded ? 'border-black/15 bg-black/[0.04]' : 'border-black/[0.06] bg-black/[0.015] hover:border-black/[0.12] hover:bg-black/[0.03]'}
                     `}
                     id={`skill-card-${skill.name.toLowerCase().replace(/\s/g, '-')}`}
                   >
                     {/* Hover spotlight effect */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                      <div className="absolute top-0 right-0 w-40 h-40 bg-white/[0.03] rounded-full blur-[60px] -translate-y-1/2 translate-x-1/4" />
+
                     </div>
 
                     <div className="relative z-10">
                       <div className="flex items-center justify-between mb-5">
-                        <h3 className={`font-semibold text-[15px] transition-colors duration-300 ${isExpanded ? 'text-white' : 'text-ash-300 group-hover:text-white'}`}>
+                        <h3 className={`font-semibold text-[15px] transition-colors duration-300 ${isExpanded ? 'text-black' : 'text-ash-300 group-hover:text-black'}`}>
                           {skill.name}
                         </h3>
                         <div className="flex items-center gap-2">
@@ -270,7 +270,7 @@ const SkillMatrix: React.FC = () => {
                       </div>
 
                       {/* Animated progress bar */}
-                      <div className="h-[2px] rounded-full bg-white/[0.06] mb-1 overflow-hidden">
+                      <div className="h-[2px] rounded-full bg-black/[0.06] mb-1 overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
@@ -292,14 +292,14 @@ const SkillMatrix: React.FC = () => {
                             transition={{ duration: 0.3, ease: ease as any }}
                             className="overflow-hidden"
                           >
-                            <div className="flex flex-wrap gap-2 mt-5 pt-5 border-t border-white/[0.06]">
+                            <div className="flex flex-wrap gap-2 mt-5 pt-5 border-t border-black/[0.06]">
                               {skill.subs.map((sub, j) => (
                                 <motion.span
                                   key={sub}
                                   initial={{ opacity: 0, scale: 0.8 }}
                                   animate={{ opacity: 1, scale: 1 }}
                                   transition={{ delay: j * 0.05, duration: 0.3 }}
-                                  className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-ash-500 text-[11px] font-mono hover:bg-white/[0.08] hover:text-ash-300 transition-all duration-200 cursor-default"
+                                  className="px-3 py-1.5 rounded-lg bg-black/[0.04] border border-black/[0.08] text-ash-500 text-[11px] font-mono hover:bg-black/[0.08] hover:text-ash-300 transition-all duration-200 cursor-default"
                                 >
                                   {sub}
                                 </motion.span>

@@ -102,6 +102,35 @@
     animation: grain 0.5s steps(1) infinite;
   }
 
+  /* Animated Grid Background */
+  .bg-grid-animated {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center center;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+  
+  .bg-grid-animated::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.02), transparent);
+    transform: translateY(-100%);
+    animation: scanline 10s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
   /* Section container */
   .section-container {
     @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12;

@@ -6,26 +6,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        noir: { // Now acting as light background palette
-          950: '#FFFFFF',
-          900: '#FAFAFA',
-          850: '#F5F5F5',
-          800: '#E5E5E5',
-          700: '#D4D4D4',
-          600: '#A3A3A3',
-          500: '#737373',
-          400: '#525252',
-          300: '#404040',
+        noir: { // Professional Light Backgrounds
+          950: '#F8FAFC', // Main body background (soft slate off-white)
+          900: '#FFFFFF', // Cards & elevated elements (pure white)
+          850: '#F1F5F9', // Hover states
+          800: '#E2E8F0', // Borders
+          700: '#CBD5E1',
+          600: '#94A3B8',
+          500: '#64748B',
+          400: '#475569',
+          300: '#334155',
         },
-        ash: { // Now acting as dark text/content palette
-          100: '#000000',
-          200: '#0A0A0A',
-          300: '#171717',
-          400: '#262626',
-          500: '#404040',
-          600: '#525252',
-          700: '#737373',
-          800: '#A3A3A3',
+        ash: { // Professional Dark Text
+          100: '#0F172A', // Main headings
+          200: '#1E293B', // Subheadings
+          300: '#334155', // Strong body text
+          400: '#475569', // Muted body text
+          500: '#64748B', // Light captions
+          600: '#94A3B8', // Very faint text
+          700: '#CBD5E1', 
+          800: '#E2E8F0',
         },
       },
       fontFamily: {

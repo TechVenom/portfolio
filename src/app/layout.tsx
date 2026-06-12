@@ -26,7 +26,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-noir-950 text-ash-100 font-sans antialiased overflow-x-hidden selection:bg-white/15 selection:text-white">
+      <body className="bg-noir-950 text-ash-100 font-sans antialiased overflow-x-hidden selection:bg-black/15 selection:text-black">
+        <div className="bg-grid-animated" aria-hidden="true" />
         <div className="grain-overlay" aria-hidden="true" />
         
         <Navigation />

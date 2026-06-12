@@ -4,85 +4,7 @@ import React, { useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 
-/* ── Minimal particle network — monochrome, low density ── */
-const ParticleCanvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animRef = useRef<number>(0);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
-
-  const init = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
-    const count = Math.min(Math.floor((w * h) / 22000), 60);
-
-    const pts = Array.from({ length: count }, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-      r: Math.random() * 1.5 + 0.3,
-      a: Math.random() * 0.25 + 0.05,
-    }));
-
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < pts.length; i++) {
-        const p = pts[i];
-        const dx = p.x - mouseRef.current.x;
-        const dy = p.y - mouseRef.current.y;
-        const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 160) {
-          const f = (160 - d) / 160;
-          p.vx += (dx / d) * f * 0.15;
-          p.vy += (dy / d) * f * 0.15;
-        }
-        p.vx *= 0.99; p.vy *= 0.99;
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,0,0,${p.a})`;
-        ctx.fill();
-
-        for (let j = i + 1; j < pts.length; j++) {
-          const q = pts[j];
-          const ex = p.x - q.x, ey = p.y - q.y;
-          const ed = Math.sqrt(ex * ex + ey * ey);
-          if (ed < 120) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(0,0,0,${(1 - ed / 120) * 0.06})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-      animRef.current = requestAnimationFrame(draw);
-    };
-
-    const onResize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
-    const onMouse = (e: MouseEvent) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
-    window.addEventListener('resize', onResize);
-    window.addEventListener('mousemove', onMouse);
-    draw();
-    return () => {
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('mousemove', onMouse);
-      cancelAnimationFrame(animRef.current);
-    };
-  }, []);
-
-  useEffect(() => { const c = init(); return () => { if (c) c(); }; }, [init]);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 z-0" style={{ width: '100%', height: '100%' }} />;
-};
-
+/* ── Clean Geometric Grid Animation ── */
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const Hero: React.FC = () => {
@@ -90,14 +12,6 @@ const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <ParticleCanvas />
-
-      {/* Subtle radial vignette */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-noir-950/30 via-transparent to-noir-950" />
-      <div className="absolute inset-0 z-[1]" aria-hidden="true">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-black/[0.015] rounded-full blur-[200px]" />
-      </div>
-
       <div className="relative z-10 section-container text-center max-w-4xl mx-auto py-20 px-6">
         {/* Branding Logo */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.2 }} className="mb-6">
