@@ -46,7 +46,7 @@ const ParticleCanvas: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.fillStyle = `rgba(0,0,0,${p.a})`;
         ctx.fill();
 
         for (let j = i + 1; j < pts.length; j++) {
@@ -57,7 +57,7 @@ const ParticleCanvas: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(255,255,255,${(1 - ed / 120) * 0.06})`;
+            ctx.strokeStyle = `rgba(0,0,0,${(1 - ed / 120) * 0.06})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -95,21 +95,21 @@ const Hero: React.FC = () => {
       {/* Subtle radial vignette */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-noir-950/30 via-transparent to-noir-950" />
       <div className="absolute inset-0 z-[1]" aria-hidden="true">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-white/[0.015] rounded-full blur-[200px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-black/[0.015] rounded-full blur-[200px]" />
       </div>
 
       <div className="relative z-10 section-container text-center max-w-4xl mx-auto py-20 px-6">
         {/* Branding Logo */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.2 }} className="mb-6">
-          <div className="w-32 h-32 mx-auto pointer-events-none select-none mix-blend-screen opacity-80">
+          <div className="w-32 h-32 mx-auto pointer-events-none select-none mix-blend-multiply opacity-80">
             <img src="/favicon.png" alt="VenomX Technologies" className="w-full h-full object-contain" />
           </div>
         </motion.div>
 
         {/* Status badge */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: ease as any, delay: 0.4 }} className="mb-10">
-          <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/10 text-ash-500 text-[11px] font-mono tracking-[0.2em] uppercase bg-noir-950/40 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse-subtle" />
+          <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-black/10 text-ash-500 text-[11px] font-mono tracking-[0.2em] uppercase bg-noir-950/40 backdrop-blur-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-black/60 animate-pulse-subtle" />
             Available for work
           </span>
         </motion.div>
@@ -117,7 +117,7 @@ const Hero: React.FC = () => {
         {/* Main headline */}
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: ease as any, delay: 0.6 }}
           className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold tracking-[-0.04em] leading-[1.05] mb-8">
-          <span className="block text-white">Hezron Paipai</span>
+          <span className="block text-black">Hezron Paipai</span>
         </motion.h1>
 
         {/* Subheading */}
@@ -141,11 +141,11 @@ const Hero: React.FC = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: ease as any, delay: 1.2 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button onClick={() => scroll('#projects')} id="hero-cta-work"
-            className="px-8 py-3.5 rounded-lg bg-white text-noir-950 font-semibold text-[14px] hover:bg-ash-300 transition-colors duration-300">
+            className="px-8 py-3.5 rounded-lg bg-black text-noir-950 font-semibold text-[14px] hover:bg-ash-300 transition-colors duration-300">
             View My Work
           </button>
           <button onClick={() => scroll('#contact')} id="hero-cta-contact"
-            className="px-8 py-3.5 rounded-lg border border-white/15 text-ash-400 font-medium text-[14px] hover:text-white hover:border-white/30 transition-all duration-300">
+            className="px-8 py-3.5 rounded-lg border border-black/15 text-ash-400 font-medium text-[14px] hover:text-black hover:border-black/30 transition-all duration-300">
             Get in Touch
           </button>
         </motion.div>

@@ -6,26 +6,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        noir: {
-          950: '#000000',
-          900: '#0A0A0A',
-          850: '#0D0D0D',
-          800: '#111111',
-          700: '#1A1A1A',
-          600: '#222222',
-          500: '#2A2A2A',
-          400: '#333333',
-          300: '#444444',
+        noir: { // Now acting as light background palette
+          950: '#FFFFFF',
+          900: '#FAFAFA',
+          850: '#F5F5F5',
+          800: '#E5E5E5',
+          700: '#D4D4D4',
+          600: '#A3A3A3',
+          500: '#737373',
+          400: '#525252',
+          300: '#404040',
         },
-        ash: {
-          100: '#FFFFFF',
-          200: '#F5F5F5',
-          300: '#E5E5E5',
-          400: '#D1D1D1',
-          500: '#A1A1A1',
-          600: '#737373',
-          700: '#525252',
-          800: '#3D3D3D',
+        ash: { // Now acting as dark text/content palette
+          100: '#000000',
+          200: '#0A0A0A',
+          300: '#171717',
+          400: '#262626',
+          500: '#404040',
+          600: '#525252',
+          700: '#737373',
+          800: '#A3A3A3',
         },
       },
       fontFamily: {
@@ -80,9 +80,9 @@ module.exports = {
         },
       },
       boxShadow: {
-        'card': '0 0 0 1px rgba(255,255,255,0.06)',
-        'card-hover': '0 0 0 1px rgba(255,255,255,0.12), 0 16px 48px -8px rgba(0,0,0,0.5)',
-        'elevated': '0 24px 64px -16px rgba(0,0,0,0.6)',
+        'card': '0 0 0 1px rgba(0,0,0,0.06)',
+        'card-hover': '0 0 0 1px rgba(0,0,0,0.12), 0 16px 48px -8px rgba(0,0,0,0.1)',
+        'elevated': '0 24px 64px -16px rgba(0,0,0,0.1)',
       },
     },
   },

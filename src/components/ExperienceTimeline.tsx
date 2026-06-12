@@ -101,7 +101,7 @@ const ExperienceTimeline: React.FC = () => {
   return (
     <section id="timeline" className="relative py-28 overflow-hidden" ref={ref}>
       {/* Background accent */}
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-white/[0.006] rounded-full blur-[150px] pointer-events-none -translate-y-1/2" />
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-black/[0.006] rounded-full blur-[150px] pointer-events-none -translate-y-1/2" />
 
       <div className="section-container">
         {/* Header */}
@@ -126,12 +126,12 @@ const ExperienceTimeline: React.FC = () => {
             className="flex items-center gap-6"
           >
             <div className="text-right">
-              <div className="text-3xl font-bold text-white tracking-tight">3+</div>
+              <div className="text-3xl font-bold text-black tracking-tight">3+</div>
               <p className="text-ash-700 text-[11px] font-mono uppercase tracking-wider">Years Active</p>
             </div>
-            <div className="w-px h-10 bg-white/[0.08]" />
+            <div className="w-px h-10 bg-black/[0.08]" />
             <div className="text-right">
-              <div className="text-3xl font-bold text-white tracking-tight">2</div>
+              <div className="text-3xl font-bold text-black tracking-tight">2</div>
               <p className="text-ash-700 text-[11px] font-mono uppercase tracking-wider">Certifications</p>
             </div>
           </motion.div>
@@ -145,7 +145,7 @@ const ExperienceTimeline: React.FC = () => {
               initial={{ height: 0 }}
               animate={inView ? { height: '100%' } : {}}
               transition={{ duration: 2, ease: ease as any, delay: 0.3 }}
-              className="w-full bg-gradient-to-b from-white/25 via-white/10 to-transparent"
+              className="w-full bg-gradient-to-b from-black/25 via-black/10 to-transparent"
             />
           </div>
 
@@ -172,18 +172,18 @@ const ExperienceTimeline: React.FC = () => {
                     >
                       {/* Pulse ring (for current positions) */}
                       {entry.highlight === 'Current' && (
-                        <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-20" />
+                        <div className="absolute -inset-2 rounded-full border border-black/10 animate-ping opacity-20" />
                       )}
                       <div className={`w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-all duration-500
                         ${entry.highlight === 'Current'
-                          ? 'border-white/30 bg-noir-950'
-                          : 'border-white/10 bg-noir-950 group-hover:border-white/25'
+                          ? 'border-black/30 bg-noir-950'
+                          : 'border-black/10 bg-noir-950 group-hover:border-black/25'
                         }`}
                       >
                         <div className={`w-[7px] h-[7px] rounded-full transition-all duration-500
                           ${entry.highlight === 'Current'
-                            ? 'bg-white/60'
-                            : 'bg-white/15 group-hover:bg-white/40'
+                            ? 'bg-black/60'
+                            : 'bg-black/15 group-hover:bg-black/40'
                           }`}
                         />
                       </div>
@@ -192,10 +192,10 @@ const ExperienceTimeline: React.FC = () => {
 
                   {/* Card */}
                   <div className="flex-1 pb-8 last:pb-0">
-                    <div className="rounded-2xl p-6 border border-white/[0.04] bg-white/[0.01] group-hover:border-white/[0.1] group-hover:bg-white/[0.025] transition-all duration-500 relative overflow-hidden">
+                    <div className="rounded-2xl p-6 border border-black/[0.04] bg-black/[0.01] group-hover:border-black/[0.1] group-hover:bg-black/[0.025] transition-all duration-500 relative overflow-hidden">
                       {/* Subtle hover spotlight */}
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                        <div className="absolute top-0 left-0 w-40 h-40 bg-white/[0.02] rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2" />
+                        <div className="absolute top-0 left-0 w-40 h-40 bg-black/[0.02] rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2" />
                       </div>
 
                       <div className="relative z-10">
@@ -208,8 +208,8 @@ const ExperienceTimeline: React.FC = () => {
 
                           {/* Current badge */}
                           {entry.highlight === 'Current' && (
-                            <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-md border border-white/15 text-[10px] font-mono uppercase tracking-wider text-ash-300">
-                              <span className="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse" />
+                            <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-md border border-black/15 text-[10px] font-mono uppercase tracking-wider text-ash-300">
+                              <span className="w-1.5 h-1.5 rounded-full bg-black/50 animate-pulse" />
                               Current
                             </span>
                           )}
@@ -230,7 +230,7 @@ const ExperienceTimeline: React.FC = () => {
                         </div>
 
                         {/* Title & Org */}
-                        <h3 className="font-semibold text-base text-ash-200 group-hover:text-white transition-colors mb-1">
+                        <h3 className="font-semibold text-base text-ash-200 group-hover:text-black transition-colors mb-1">
                           {entry.title}
                         </h3>
                         <p className="text-[13px] text-ash-600 mb-4">{entry.org}</p>

@@ -18,7 +18,7 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
   }
 
   body {
@@ -37,17 +37,17 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.12);
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.25);
   }
 
   /* Selection colors */
   ::selection {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
+    background: rgba(0, 0, 0, 0.15);
+    color: #000;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -63,19 +63,19 @@
 @layer components {
   /* Glass Card — Noir variant */
   .glass-noir {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-noir:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
   }
 
   .glass-noir-strong {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   /* Card hover lift */
@@ -85,7 +85,7 @@
 
   .card-lift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1);
   }
 
   /* Grain Overlay */
@@ -127,7 +127,7 @@
   }
 
   .input-noir:focus {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
   }
 
   /* Divider */

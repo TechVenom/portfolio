@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative py-14 border-t border-white/[0.04]">
+    <footer className="relative py-14 border-t border-black/[0.04]">
       <div className="section-container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Left — Brand */}
@@ -20,8 +20,8 @@ const Footer: React.FC = () => {
               onClick={scrollToTop}
               className="flex items-center gap-3 group"
             >
-              <div className="w-7 h-7 rounded-md border border-white/15 flex items-center justify-center group-hover:border-white/30 transition-colors">
-                <span className="text-white font-bold text-[10px]">HP</span>
+              <div className="w-7 h-7 rounded-md border border-black/15 flex items-center justify-center group-hover:border-black/30 transition-colors">
+                <span className="text-black font-bold text-[10px]">HP</span>
               </div>
               <span className="text-ash-300 font-medium text-sm tracking-tight">Hezron Paipai</span>
             </button>
@@ -33,15 +33,15 @@ const Footer: React.FC = () => {
           {/* Center — Social links */}
           <div className="flex items-center gap-4">
             <a href="https://github.com/TechVenom" target="_blank" rel="noopener noreferrer"
-              className="p-2.5 rounded-lg border border-white/[0.04] text-ash-700 hover:text-white hover:border-white/10 transition-all duration-300" aria-label="GitHub">
+              className="p-2.5 rounded-lg border border-black/[0.04] text-ash-700 hover:text-black hover:border-black/10 transition-all duration-300" aria-label="GitHub">
               <Github size={16} />
             </a>
             <a href="https://ke.linkedin.com/in/hezron-paipai-92013a264" target="_blank" rel="noopener noreferrer"
-              className="p-2.5 rounded-lg border border-white/[0.04] text-ash-700 hover:text-white hover:border-white/10 transition-all duration-300" aria-label="LinkedIn">
+              className="p-2.5 rounded-lg border border-black/[0.04] text-ash-700 hover:text-black hover:border-black/10 transition-all duration-300" aria-label="LinkedIn">
               <Linkedin size={16} />
             </a>
             <a href="mailto:phezron65@gmail.com"
-              className="p-2.5 rounded-lg border border-white/[0.04] text-ash-700 hover:text-white hover:border-white/10 transition-all duration-300" aria-label="Email">
+              className="p-2.5 rounded-lg border border-black/[0.04] text-ash-700 hover:text-black hover:border-black/10 transition-all duration-300" aria-label="Email">
               <Mail size={16} />
             </a>
           </div>
