@@ -19,22 +19,26 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "../components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className="bg-noir-950 text-ash-100 font-sans antialiased overflow-x-hidden selection:bg-black/15 selection:text-black">
-        <div className="bg-grid-animated" aria-hidden="true" />
-        <div className="grain-overlay" aria-hidden="true" />
-        
-        <Navigation />
-        <main className="relative z-10">
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <div className="bg-grid-animated" aria-hidden="true" />
+          <div className="grain-overlay" aria-hidden="true" />
+          
+          <Navigation />
+          <main className="relative z-10">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
