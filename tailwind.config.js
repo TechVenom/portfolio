@@ -17,15 +17,15 @@ module.exports = {
           400: '#475569',
           300: '#334155',
         },
-        ash: { // Professional Dark Text
-          100: '#0F172A', // Main headings
-          200: '#1E293B', // Subheadings
-          300: '#334155', // Strong body text
-          400: '#475569', // Muted body text
-          500: '#64748B', // Light captions
-          600: '#94A3B8', // Very faint text
-          700: '#CBD5E1', 
-          800: '#E2E8F0',
+        ash: { // Professional Dark Text - High Legibility
+          100: '#020617', // slate-950 (Blackest)
+          200: '#0F172A', // slate-900
+          300: '#1E293B', // slate-800
+          400: '#334155', // slate-700
+          500: '#475569', // slate-600 
+          600: '#475569', // slate-600 (Primary Body Text)
+          700: '#64748B', // slate-500 (Subtitles & Tags)
+          800: '#94A3B8', // slate-400 (Faintest legible text)
         },
       },
       fontFamily: {
