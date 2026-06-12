@@ -6,27 +6,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        noir: { // Professional Light Backgrounds
-          950: '#F8FAFC', // Main body background (soft slate off-white)
-          900: '#FFFFFF', // Cards & elevated elements (pure white)
-          850: '#F1F5F9', // Hover states
-          800: '#E2E8F0', // Borders
-          700: '#CBD5E1',
-          600: '#94A3B8',
-          500: '#64748B',
-          400: '#475569',
-          300: '#334155',
+        noir: { 
+          950: 'rgb(var(--noir-950) / <alpha-value>)',
+          900: 'rgb(var(--noir-900) / <alpha-value>)',
+          850: 'rgb(var(--noir-850) / <alpha-value>)',
+          800: 'rgb(var(--noir-800) / <alpha-value>)',
+          700: 'rgb(var(--noir-700) / <alpha-value>)',
+          600: 'rgb(var(--noir-600) / <alpha-value>)',
+          500: 'rgb(var(--noir-500) / <alpha-value>)',
+          400: 'rgb(var(--noir-400) / <alpha-value>)',
+          300: 'rgb(var(--noir-300) / <alpha-value>)',
         },
-        ash: { // Professional Dark Text - High Legibility
-          100: '#020617', // slate-950 (Blackest)
-          200: '#0F172A', // slate-900
-          300: '#1E293B', // slate-800
-          400: '#334155', // slate-700
-          500: '#475569', // slate-600 
-          600: '#475569', // slate-600 (Primary Body Text)
-          700: '#64748B', // slate-500 (Subtitles & Tags)
-          800: '#94A3B8', // slate-400 (Faintest legible text)
+        ash: { 
+          100: 'rgb(var(--ash-100) / <alpha-value>)',
+          200: 'rgb(var(--ash-200) / <alpha-value>)',
+          300: 'rgb(var(--ash-300) / <alpha-value>)',
+          400: 'rgb(var(--ash-400) / <alpha-value>)',
+          500: 'rgb(var(--ash-500) / <alpha-value>)',
+          600: 'rgb(var(--ash-600) / <alpha-value>)',
+          700: 'rgb(var(--ash-700) / <alpha-value>)',
+          800: 'rgb(var(--ash-800) / <alpha-value>)',
         },
+        black: 'rgb(var(--theme-black) / <alpha-value>)',
+        white: 'rgb(var(--theme-white) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
